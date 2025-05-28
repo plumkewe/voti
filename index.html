@@ -103,6 +103,7 @@
       border: 1px solid transparent;
     }
     
+    
     .materia-item:hover,
     .materia-item.active {
       background-color: #444;
@@ -287,6 +288,24 @@
       overflow-x: hidden; /* default, sarà modificato da JS */
     }
     
+    button.sort-button {
+      all: unset; /* reset completo dello stile nativo */
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      color: #e0e0e0;
+      font-family: "Roboto", sans-serif;
+      user-select: none;
+    }
+    
+    button.sort-button .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      color: #aaa;
+      user-select: none;
+    }
+
     
   </style>
 </head>
@@ -310,8 +329,6 @@
     <div class="chart-item" data-type="linea-anno-continuo">Linea Anno Continuo</div> <!-- Nuovo grafico -->
   </div>
 
-
-
   
   <div class="anni-lista" id="anniLista"></div>
   <div class="materie-lista" id="materieLista"></div>
@@ -321,8 +338,18 @@
         <tr>
           <th>#</th>
           <th>MATERIA</th>
-          <th>DATA</th>
-          <th>VOTO</th>
+          <th>
+            DATA
+            <button id="sortDateBtn" class="sort-button" data-order="asc" aria-label="Ordina per data">
+              <span class="material-symbols-outlined">swap_vert</span>
+            </button>
+          </th>
+          <th>
+            VOTO
+            <button id="sortVotoBtn" class="sort-button" data-order="asc" aria-label="Ordina per voto">
+              <span class="material-symbols-outlined">swap_vert</span>
+            </button>
+          </th>
           <th>TIPO</th>
         </tr>
       </thead>
@@ -473,6 +500,65 @@
           totalCounts.pratico++;
         }
       });
+      
+      
+      // Funzione per costruire solo tbody, così non tocchiamo l'intestazione
+      function buildTableBody(data) {
+        const tbody = document.querySelector('tbody');
+        tbody.innerHTML = ''; // pulisci righe precedenti
+        
+        data.forEach((item, i) => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+      <td>${i + 1}</td>
+      <td>${item.MATERIA}</td>
+      <td>${item.DATA}</td>
+      <td>${item.VOTO}</td>
+      <td>${item.TIPO}</td>
+    `;
+          tbody.appendChild(row);
+        });
+      }
+      
+      // Stato ordinamento
+      let currentSort = {
+        column: null,
+        order: 'asc',
+      };
+      
+      function sortData(column) {
+        if (currentSort.column === column) {
+          currentSort.order = currentSort.order === 'asc' ? 'desc' : 'asc';
+        } else {
+          currentSort.column = column;
+          currentSort.order = 'asc';
+        }
+        
+        allData.sort((a, b) => {
+          let valA = a[column];
+          let valB = b[column];
+          
+          if (column === 'DATA') {
+            valA = new Date(valA);
+            valB = new Date(valB);
+          } else if (column === 'VOTO') {
+            valA = parseFloat(valA) || 0;
+            valB = parseFloat(valB) || 0;
+          }
+          
+          return currentSort.order === 'asc' ? valA - valB : valB - valA;
+        });
+        
+        buildTableBody(allData);
+      }
+      
+      // Aggiungi eventi dopo che la tabella e allData sono pronti
+      document.getElementById('sortDateBtn').addEventListener('click', () => sortData('DATA'));
+      document.getElementById('sortVotoBtn').addEventListener('click', () => sortData('VOTO'));
+      
+      // All'inizio, costruisci tabella con tutti i dati (senza filtro)
+      buildTableBody(allData);
+
       
       // Funzione helper icona+conteggio (come da te già scritta)
       function createTipoCount(iconName, count) {
