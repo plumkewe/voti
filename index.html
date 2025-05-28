@@ -253,15 +253,54 @@
       border-color: #888;
     }
 
+    .chart-container {
+      width: 100%;
+      max-width: 1000px; /* come per le altre liste */
+      margin: 0 auto 1rem auto;
+      padding: 0.5rem;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      border: 1px solid #444;
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+      /* Altezza fissa o massima altezza */
+      height: 320px;  /* puoi regolare come vuoi */
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    
+    #chartContainer {
+      width: 100%;   /* qui verrà sovrascritto dinamicamente in JS */
+      height: 100%;
+      max-width: 700px; /* puoi rimuovere max-width se vuoi */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden; /* default, sarà modificato da JS */
+    }
+
+    
+    #myChart {
+      width: 100% !important;
+      height: 100% !important;
+      max-height: 300px;
+      max-width: 700px;
+    }
 
   </style>
 </head>
 <body>
   
   <!-- Grafico -->
-  <div id="chartContainer" style="width: 100%; margin: 20px auto;">
-    <canvas id="myChart"></canvas>
+  <div class="chart-container">
+    <div id="chartContainer" style="overflow-x:auto; width: 100%;">
+      <canvas id="myChart"></canvas>
+    </div>
   </div>
+
   
   <!-- Menu di selezione grafico -->
   <!-- Selezione tipo di grafico (stile come anni-lista) -->
@@ -524,6 +563,8 @@
         renderChart();
       });
     });
+    
+    
 
     
     function handleCSVContent(csvText) {
@@ -545,13 +586,18 @@
       
       const colors = years.map((y, i) => {
         return getComputedStyle(document.documentElement)
-        .getPropertyValue(`--color-anno-${y}`)
-        || `hsl(${(i * 60) % 360}, 70%, 50%)`;
+        .getPropertyValue(`--color-anno-${y}`) || `hsl(${(i * 60) % 360}, 70%, 50%)`;
       });
       
       const ctx = document.getElementById("myChart");
+      const chartContainer = document.getElementById("chartContainer");
+      
+      // Reset style scroll & width per default
+      chartContainer.style.overflowX = "hidden";
+      chartContainer.style.width = "100%";
       
       if (type === "tipo") {
+        // pie chart come prima
         const counts = {};
         data.forEach(d => counts[d.TIPO] = (counts[d.TIPO] || 0) + 1);
         
@@ -694,7 +740,7 @@
           });
         }
         
-      }  else if (type === "linea-anno-continuo") {
+      } else if (type === "linea-anno-continuo") {
         const sortedYears = years.map(y => parseInt(y)).sort((a, b) => a - b);
         
         const dataPoints = [];
@@ -762,7 +808,7 @@
                       lineWidth: 2,
                       hidden: false,
                       datasetIndex: 0,
-                      fontColor: "#666" // Se usi Chart.js v4: usa `color` al posto di `fontColor`
+                      fontColor: "#666"
                     }));
                   }
                 }
