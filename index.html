@@ -278,6 +278,7 @@
       overflow: hidden;
     }
     
+    
     #chartContainer {
       width: 100%;   /* qui verrà sovrascritto dinamicamente in JS */
       height: 100%;
@@ -305,8 +306,6 @@
       color: #aaa;
       user-select: none;
     }
-
-    
   </style>
 </head>
 <body>
@@ -429,6 +428,8 @@
       return data;
     }
     
+    
+    
     function buildTable(data) {
       const tbody = document.querySelector('#votiTable tbody');
       tbody.innerHTML = '';
@@ -500,65 +501,6 @@
           totalCounts.pratico++;
         }
       });
-      
-      
-      // Funzione per costruire solo tbody, così non tocchiamo l'intestazione
-      function buildTableBody(data) {
-        const tbody = document.querySelector('tbody');
-        tbody.innerHTML = ''; // pulisci righe precedenti
-        
-        data.forEach((item, i) => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-      <td>${i + 1}</td>
-      <td>${item.MATERIA}</td>
-      <td>${item.DATA}</td>
-      <td>${item.VOTO}</td>
-      <td>${item.TIPO}</td>
-    `;
-          tbody.appendChild(row);
-        });
-      }
-      
-      // Stato ordinamento
-      let currentSort = {
-        column: null,
-        order: 'asc',
-      };
-      
-      function sortData(column) {
-        if (currentSort.column === column) {
-          currentSort.order = currentSort.order === 'asc' ? 'desc' : 'asc';
-        } else {
-          currentSort.column = column;
-          currentSort.order = 'asc';
-        }
-        
-        allData.sort((a, b) => {
-          let valA = a[column];
-          let valB = b[column];
-          
-          if (column === 'DATA') {
-            valA = new Date(valA);
-            valB = new Date(valB);
-          } else if (column === 'VOTO') {
-            valA = parseFloat(valA) || 0;
-            valB = parseFloat(valB) || 0;
-          }
-          
-          return currentSort.order === 'asc' ? valA - valB : valB - valA;
-        });
-        
-        buildTableBody(allData);
-      }
-      
-      // Aggiungi eventi dopo che la tabella e allData sono pronti
-      document.getElementById('sortDateBtn').addEventListener('click', () => sortData('DATA'));
-      document.getElementById('sortVotoBtn').addEventListener('click', () => sortData('VOTO'));
-      
-      // All'inizio, costruisci tabella con tutti i dati (senza filtro)
-      buildTableBody(allData);
-
       
       // Funzione helper icona+conteggio (come da te già scritta)
       function createTipoCount(iconName, count) {
@@ -656,6 +598,51 @@
       selectedAnni.clear();
       updateFilter();
     }
+    
+    let currentSort = {
+      column: null,
+      order: 'asc'
+    };
+    
+    function sortTableBy(column) {
+      if (currentSort.column === column) {
+        currentSort.order = currentSort.order === 'asc' ? 'desc' : 'asc';
+      } else {
+        currentSort.column = column;
+        currentSort.order = 'asc';
+      }
+      
+      let sortedData = [...allData];
+      
+      sortedData.sort((a, b) => {
+        let valA = a[column];
+        let valB = b[column];
+        
+        if (column === 'VOTO') {
+          valA = parseFloat(valA.replace(',', '.')) || 0;
+          valB = parseFloat(valB.replace(',', '.')) || 0;
+        }
+        
+        if (column === 'DATA') {
+          valA = new Date(valA);
+          valB = new Date(valB);
+        }
+        
+        if (valA < valB) return currentSort.order === 'asc' ? -1 : 1;
+        if (valA > valB) return currentSort.order === 'asc' ? 1 : -1;
+        return 0;
+      });
+      
+      buildTable(sortedData);
+    }
+    
+    document.getElementById('sortDateBtn').addEventListener('click', () => {
+      sortTableBy('DATA');
+    });
+    
+    document.getElementById('sortVotoBtn').addEventListener('click', () => {
+      sortTableBy('VOTO');
+    });
     
     let chart; // Chart.js instance
     
@@ -954,6 +941,24 @@
         console.warn('Caricamento automatico fallito:', err.message);
       });
     }
+    
+    Chart.defaults.color = '#ffffff';
+    
+    // Legenda
+    Chart.defaults.plugins.legend.labels.color = '#ffffff';
+    
+    // Titolo (se in futuro ne aggiungi uno)
+    Chart.defaults.plugins.title.color = '#ffffff';
+    
+    // Tooltip: testo e titolo
+    Chart.defaults.plugins.tooltip.titleColor = '#ffffff';
+    Chart.defaults.plugins.tooltip.bodyColor = '#ffffff';
+    
+    // Assi: ticks e label
+    Chart.defaults.scales.x.ticks.color = '#ffffff';
+    Chart.defaults.scales.y.ticks.color = '#ffffff';
+    Chart.defaults.scales.x.title.color = '#ffffff';
+    Chart.defaults.scales.y.title.color = '#ffffff';
 
   </script>
 </body>
