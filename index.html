@@ -325,9 +325,9 @@
     <div class="chart-item" data-type="quadrimestre">Quadrimestre</div>
     <div class="chart-item" data-type="mese">Mese</div>
     <div class="chart-item" data-type="media-mese">Media</div>
-    <div class="chart-item" data-type="linea-anno-continuo">Linea Anno Continuo</div> <!-- Nuovo grafico -->
+    <div class="chart-item" data-type="linea-anno-continuo">Linea Anno Continuo</div>
+    <div class="chart-item" data-type="insufficienze">Insufficienze</div> <!-- ✅ Bottone aggiunto -->
   </div>
-
   
   <div class="anni-lista" id="anniLista"></div>
   <div class="materie-lista" id="materieLista"></div>
@@ -370,6 +370,7 @@
       const romans = ["I", "II", "III", "IV", "V"];
       return romans[num - 1] || num;
     }
+
 
     function buildAnniList(data) {
       const anniContainer = document.getElementById('anniLista');
@@ -563,21 +564,48 @@
     }
     
     function updateFilter() {
-      let filteredData = allData;
-      
+      // Filtro per anni
+      let dataByAnno = allData;
       if (selectedAnni.size > 0) {
-        filteredData = filteredData.filter(d => selectedAnni.has(d.A));
+        dataByAnno = dataByAnno.filter(d => selectedAnni.has(d.A));
       }
       
+      // Filtro per materia
+      let dataByAnnoEMateria = dataByAnno;
       if (currentFilter) {
-        filteredData = filteredData.filter(d => d.MATERIA === currentFilter);
+        dataByAnnoEMateria = dataByAnno.filter(d => d.MATERIA === currentFilter);
       }
       
-      buildTable(filteredData);
-      buildMaterieList(allData);
-      buildAnniList(allData); // mostra tutti gli anni, ma attiva quelli selezionati
+      // Applico ordinamento se c'è
+      if (currentSort.column) {
+        dataByAnnoEMateria = dataByAnnoEMateria.slice().sort((a, b) => {
+          let valA = a[currentSort.column];
+          let valB = b[currentSort.column];
+          
+          if (currentSort.column === 'VOTO') {
+            valA = parseFloat(valA.replace(',', '.')) || 0;
+            valB = parseFloat(valB.replace(',', '.')) || 0;
+          } else if (currentSort.column === 'DATA') {
+            valA = new Date(valA);
+            valB = new Date(valB);
+          }
+          
+          if (valA < valB) return currentSort.order === 'asc' ? -1 : 1;
+          if (valA > valB) return currentSort.order === 'asc' ? 1 : -1;
+          return 0;
+        });
+      }
+      
+      // Ricostruisco tabella e grafico
+      buildTable(dataByAnnoEMateria);
       renderChart();
+      
+      // Ricostruisco menu materie e anni come prima
+      buildMaterieList(dataByAnno);
+      buildAnniList(allData);
     }
+
+    
     let selectedChartType = 'tipo'; // default
 
     
@@ -612,29 +640,9 @@
         currentSort.order = 'asc';
       }
       
-      let sortedData = [...allData];
-      
-      sortedData.sort((a, b) => {
-        let valA = a[column];
-        let valB = b[column];
-        
-        if (column === 'VOTO') {
-          valA = parseFloat(valA.replace(',', '.')) || 0;
-          valB = parseFloat(valB.replace(',', '.')) || 0;
-        }
-        
-        if (column === 'DATA') {
-          valA = new Date(valA);
-          valB = new Date(valB);
-        }
-        
-        if (valA < valB) return currentSort.order === 'asc' ? -1 : 1;
-        if (valA > valB) return currentSort.order === 'asc' ? 1 : -1;
-        return 0;
-      });
-      
-      buildTable(sortedData);
+      updateFilter(); // aggiorno tabella e grafico con nuovo ordinamento + filtri
     }
+
     
     document.getElementById('sortDateBtn').addEventListener('click', () => {
       sortTableBy('DATA');
@@ -646,6 +654,7 @@
     
     let chart; // Chart.js instance
     
+
     function renderChart() {
       if (chart) chart.destroy();
       
@@ -705,16 +714,9 @@
         
       } else if (type === "mese" || type === "media-mese") {
         const allMonths = [
-          { idx: 8, label: "Set" },
-          { idx: 9, label: "Ott" },
-          { idx: 10, label: "Nov" },
-          { idx: 11, label: "Dic" },
-          { idx: 0, label: "Gen" },
-          { idx: 1, label: "Feb" },
-          { idx: 2, label: "Mar" },
-          { idx: 3, label: "Apr" },
-          { idx: 4, label: "Mag" },
-          { idx: 5, label: "Giu" },
+          { idx: 8, label: "Set" }, { idx: 9, label: "Ott" }, { idx: 10, label: "Nov" }, { idx: 11, label: "Dic" },
+          { idx: 0, label: "Gen" }, { idx: 1, label: "Feb" }, { idx: 2, label: "Mar" }, { idx: 3, label: "Apr" },
+          { idx: 4, label: "Mag" }, { idx: 5, label: "Giu" },
         ];
         
         const monthsWithData = allMonths.filter(({ idx }) =>
@@ -796,6 +798,7 @@
                     label: ctx => ctx.dataset.label + ": " + ctx.formattedValue
                   }
                 }
+                
               },
               scales: {
                 y: { beginAtZero: true, suggestedMax: 10 }
@@ -804,11 +807,12 @@
           });
         }
         
-      }  else if (type === "linea-anno-continuo") {
+      } else if (type === "linea-anno-continuo") {
         const sortedYears = years.map(y => parseInt(y)).sort((a, b) => a - b);
         
         const dataPoints = [];
         const annoPerPunto = [];
+        const infoPerPunto = [];  // per tipo e data
         
         sortedYears.forEach(anno => {
           const datiAnno = data
@@ -817,12 +821,14 @@
           datiAnno.forEach(d => {
             dataPoints.push(parseFloat(d.VOTO));
             annoPerPunto.push(anno);
+            infoPerPunto.push({ tipo: d.TIPO, data: d.DATA });
           });
         });
         
-        const colors = sortedYears.map((anno, i) =>
+        const lineColors = sortedYears.map((anno, i) =>
           getComputedStyle(document.documentElement)
-          .getPropertyValue(`--color-anno-${anno}`) || `hsl(${(i * 60) % 360}, 70%, 50%)`
+          .getPropertyValue(`--color-anno-${anno}`)
+          || `hsl(${(i * 60) % 360}, 70%, 50%)`
         );
         
         chart = new Chart(ctx, {
@@ -837,23 +843,23 @@
               spanGaps: true,
               borderColor: ctx => {
                 const i = ctx.p0DataIndex;
-                return colors[sortedYears.indexOf(annoPerPunto[i])];
+                return lineColors[sortedYears.indexOf(annoPerPunto[i])];
               },
               pointRadius: 5,
               pointHoverRadius: 8,
               pointBackgroundColor: ctx => {
                 const i = ctx.dataIndex;
-                return colors[sortedYears.indexOf(annoPerPunto[i])];
+                return lineColors[sortedYears.indexOf(annoPerPunto[i])];
               },
               pointBorderColor: ctx => {
                 const i = ctx.dataIndex;
-                return colors[sortedYears.indexOf(annoPerPunto[i])];
+                return lineColors[sortedYears.indexOf(annoPerPunto[i])];
               },
               pointBorderWidth: 0,
               segment: {
                 borderColor: ctx => {
                   const i = ctx.p0DataIndex;
-                  return colors[sortedYears.indexOf(annoPerPunto[i])];
+                  return lineColors[sortedYears.indexOf(annoPerPunto[i])];
                 }
               }
             }]
@@ -864,33 +870,81 @@
               legend: {
                 display: true,
                 labels: {
+                  // questo imposta il colore di default, ma poi generateLabels lo sovrascrive:
+                  color: 'white',
                   generateLabels: chart => {
                     return sortedYears.map((anno, i) => ({
                       text: toRoman(anno),
-                      fillStyle: colors[i].trim(),
-                      strokeStyle: colors[i].trim(),
+                      fillStyle: lineColors[i].trim(),
+                      strokeStyle: lineColors[i].trim(),
                       lineWidth: 2,
                       hidden: false,
                       datasetIndex: 0,
-                      fontColor: "#666" // Se usi Chart.js v4: usa `color` al posto di `fontColor`
+                      // aggiungi esplicitamente il colore del testo:
+                      color: 'white',      // Chart.js v4
+                      fontColor: 'white'   // Chart.js v2/3
                     }));
                   }
                 }
               },
               tooltip: {
+                titleColor: "white",
+                bodyColor: "white",
                 callbacks: {
-                  label: ctx => `Voto: ${ctx.formattedValue}`
+                  label: ctx => {
+                    const i = ctx.dataIndex;
+                    const voto = ctx.formattedValue;
+                    const tipo = infoPerPunto[i].tipo;
+                    const dataStr = new Date(infoPerPunto[i].data).toLocaleDateString();
+                    return `Voto: ${voto}  •  Tipo: ${tipo}  •  Data: ${dataStr}`;
+                  }
                 }
               }
             },
             scales: {
               y: {
                 beginAtZero: true,
-                suggestedMax: 10
+                suggestedMax: 10,
+                ticks: { color: 'white' },
+                grid: { color: 'rgba(255,255,255,0.1)' }
               },
               x: {
-                ticks: { display: false },
+                ticks: { display: false }, // se vuoi nascondere asse x, altrimenti metti color: 'white'
                 grid: { display: false }
+              }
+            }
+          }
+
+        });
+        
+      } else if (type === "insufficienze") {
+        const datasets = [{
+          label: "Insufficienze (<6)",
+          data: years.map(anno => {
+            return data.filter(d => d.A === anno && parseFloat(d.VOTO) < 6).length;
+          }),
+          backgroundColor: colors.map(c => c.trim())
+        }];
+        
+        chart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: years.map(y => toRoman(parseInt(y))),
+            datasets
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: { beginAtZero: true }
+            },
+            plugins: {
+              legend: {
+                display:false
+              },
+              tooltip: {
+                callbacks: {
+                  label: ctx => `${ctx.dataset.label}: ${ctx.formattedValue}`
+                }
               }
             }
           }
