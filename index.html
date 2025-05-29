@@ -183,6 +183,35 @@
       border-radius: 8px;
     }
     
+    .upload-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    .clear-cache-btn {
+      background-color: #333;
+      color: #e0e0e0;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: 1px solid #555;
+      transition: background-color 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .clear-cache-btn:hover {
+      background-color: #444;
+    }
+    
+    .clear-cache-btn .material-symbols-outlined {
+      font-size: 20px;
+      color: #e0e0e0;
+    }
+
+    
     /* Celle */
     th, td {
       padding: 0.75rem 1rem;
@@ -289,6 +318,11 @@
       overflow-x: hidden; /* default, sarà modificato da JS */
     }
     
+    #myChart {
+      width: 100%;
+    }
+
+    
     button.sort-button {
       all: unset; /* reset completo dello stile nativo */
       cursor: pointer;
@@ -306,6 +340,12 @@
       color: #aaa;
       user-select: none;
     }
+    @media (max-width: 600px) {
+      body {
+        padding: 5px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -327,6 +367,9 @@
     <div class="chart-item" data-type="media-mese">Media</div>
     <div class="chart-item" data-type="linea-anno-continuo">Linea Anno Continuo</div>
     <div class="chart-item" data-type="insufficienze">Insufficienze</div> <!-- ✅ Bottone aggiunto -->
+    <div class="chart-item" data-type="media-primo-quadrimestre">Media Q1</div>
+    <div class="chart-item" data-type="media-secondo-quadrimestre">Media Q2</div>
+    <div class="chart-item" data-type="confronto-materie">Confronto Q1 vs Q2</div>
   </div>
   
   <div class="anni-lista" id="anniLista"></div>
@@ -357,11 +400,20 @@
   </div>
   
   <div class="file-upload">
-    <label for="csvFile">Carica file CSV</label>
+    <div class="upload-buttons">
+      <label for="csvFile">Carica file CSV</label>
+      <button id="clearCacheBtn" class="clear-cache-btn" title="Cancella cache">
+        <span class="material-symbols-outlined">delete</span>
+      </button>
+    </div>
     <input type="file" id="csvFile" accept=".csv" />
   </div>
 
+
+  
+
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.1.0/dist/chartjs-plugin-annotation.min.js"></script>
 
   <script>
     let selectedAnni = new Set(); // anni selezionati (es. "1A", "2A")
@@ -689,7 +741,252 @@
           }
         });
         
-      } else if (type === "quadrimestre") {
+      }  else if (type === "media-primo-quadrimestre") {
+        // Trova tutte le materie nel dataset (solo dati Q=1)
+        const materie = Array.from(new Set(data.filter(d => d.Q === "1").map(d => d.MATERIA)));
+        
+        // Costruiamo un dataset per ogni anno
+        const datasets = years.map((anno, i) => {
+          // Per ogni materia calcoliamo la media dei voti per quell'anno e Q=1
+          const mediaPerMateria = materie.map(materia => {
+            const voti = data.filter(d => d.A === anno && d.Q === "1" && d.MATERIA === materia)
+            .map(d => parseFloat(d.VOTO))
+            .filter(v => !isNaN(v));
+            
+            if (voti.length === 0) return null;
+            const sum = voti.reduce((a, b) => a + b, 0);
+            return sum / voti.length;
+          });
+          
+          return {
+            label: toRoman(parseInt(anno)),
+            data: mediaPerMateria,
+            fill: false,
+            borderColor: colors[i].trim(),
+            backgroundColor: colors[i].trim(),
+            tension: 0,
+            spanGaps: true
+          };
+        });
+        
+        chart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: materie,
+            datasets
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true,
+                suggestedMax: 10,
+                ticks: { color: 'white' },
+                grid: { color: 'rgba(0,0,0,0.1)' }
+              },
+              x: {
+                ticks: { color: 'white' },
+                grid: { display: false }
+              }
+            },
+            plugins: {
+              legend: { position: "top" },
+              tooltip: {
+                callbacks: {
+                  label: ctx => `${ctx.dataset.label} - ${ctx.label}: ${ctx.formattedValue}`
+                }
+              },
+              annotation: {
+                annotations: {
+                  line1: {
+                    type: 'line',
+                    yMin: 6,
+                    yMax: 6,
+                    borderColor: 'gray',
+                    borderWidth: 2,
+                    borderDash: [6, 6], // linee tratteggiate: 6px linea, 6px spazio
+                    label: {
+                      enabled: true,
+                      content: '',
+                      color: 'gray',
+                      position: 'start'
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+        });
+      } else if (type === "media-secondo-quadrimestre") {
+        // Trova tutte le materie nel dataset (solo dati Q=2)
+        const materie = Array.from(new Set(data.filter(d => d.Q === "2").map(d => d.MATERIA)));
+        
+        // Costruiamo un dataset per ogni anno
+        const datasets = years.map((anno, i) => {
+          // Per ogni materia calcoliamo la media dei voti per quell'anno e Q=2
+          const mediaPerMateria = materie.map(materia => {
+            const voti = data.filter(d => d.A === anno && d.Q === "2" && d.MATERIA === materia)
+            .map(d => parseFloat(d.VOTO))
+            .filter(v => !isNaN(v));
+            
+            if (voti.length === 0) return null;
+            const sum = voti.reduce((a, b) => a + b, 0);
+            return sum / voti.length;
+          });
+          
+          return {
+            label: toRoman(parseInt(anno)),
+            data: mediaPerMateria,
+            fill: false,
+            borderColor: colors[i].trim(),
+            backgroundColor: colors[i].trim(),
+            tension: 0,
+            spanGaps: true
+          };
+        });
+        
+        chart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: materie,
+            datasets
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true,
+                suggestedMax: 10,
+                ticks: { color: 'white' },
+                grid: { color: 'rgba(0,0,0,0.1)' }
+              },
+              x: {
+                ticks: { color: 'white' },
+                grid: { display: false }
+              }
+            },
+            plugins: {
+              legend: { position: "top" },
+              tooltip: {
+                callbacks: {
+                  label: ctx => `${ctx.dataset.label} - ${ctx.label}: ${ctx.formattedValue}`
+                }
+              },
+              annotation: {
+                annotations: {
+                  line1: {
+                    type: 'line',
+                    yMin: 6,
+                    yMax: 6,
+                    borderColor: 'gray',
+                    borderWidth: 2,
+                    borderDash: [6, 6], // linee tratteggiate: 6px linea, 6px spazio
+                    label: {
+                      enabled: true,
+                      content: '',
+                      color: 'gray',
+                      position: 'start'
+                    }
+                  }
+                }
+              }
+            }
+          }
+          
+        });
+      } else if (type === "confronto-materie") {
+        const materie = Array.from(new Set(data.map(d => d.MATERIA)));
+        
+        const datasets = [];
+        
+        years.forEach((anno, i) => {
+          const colorBase = colors[i].trim();
+          
+          // Primo quadrimestre (Q=1)
+          const mediaQ1 = materie.map(materia => {
+            const voti = data.filter(d => d.A === anno && d.Q === "1" && d.MATERIA === materia)
+            .map(d => parseFloat(d.VOTO)).filter(v => !isNaN(v));
+            if (voti.length === 0) return null;
+            return voti.reduce((a, b) => a + b, 0) / voti.length;
+          });
+          
+          datasets.push({
+            label: `${toRoman(parseInt(anno))} - Q1`,
+            data: mediaQ1,
+            backgroundColor: colorBase,
+            borderColor: colorBase,
+            borderWidth: 1
+          });
+          
+          // Secondo quadrimestre (Q=2)
+          const mediaQ2 = materie.map(materia => {
+            const voti = data.filter(d => d.A === anno && d.Q === "2" && d.MATERIA === materia)
+            .map(d => parseFloat(d.VOTO)).filter(v => !isNaN(v));
+            if (voti.length === 0) return null;
+            return voti.reduce((a, b) => a + b, 0) / voti.length;
+          });
+          
+          datasets.push({
+            label: `${toRoman(parseInt(anno))} - Q2`,
+            data: mediaQ2,
+            backgroundColor: colorBase,
+            borderColor: colorBase,
+            borderWidth: 1,
+            borderDash: [4, 4] // visivamente differenziabile
+          });
+        });
+        
+        chart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: materie,
+            datasets
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true,
+                suggestedMax: 10,
+                ticks: { color: 'white' },
+                grid: { color: 'rgba(0,0,0,0.1)' }
+              },
+              x: {
+                ticks: { color: 'white' },
+                grid: { display: false }
+              }
+            },
+            plugins: {
+              legend: { position: "top" },
+              tooltip: {
+                callbacks: {
+                  label: ctx => `${ctx.dataset.label} - ${ctx.label}: ${ctx.formattedValue}`
+                }
+              },
+              annotation: {
+                annotations: {
+                  line1: {
+                    type: 'line',
+                    yMin: 6,
+                    yMax: 6,
+                    borderColor: 'gray',
+                    borderWidth: 2,
+                    borderDash: [6, 6], // linee tratteggiate: 6px linea, 6px spazio
+                    label: {
+                      enabled: true,
+                      content: '',
+                      color: 'gray',
+                      position: 'start'
+                    }
+                  }
+                }
+              }
+            }
+          }
+        });
+      }
+else if (type === "quadrimestre") {
         const labels = ["1", "2"];
         const datasets = years.map((anno, i) => {
           const cnt = { "1": 0, "2": 0 };
@@ -913,10 +1210,9 @@
                 grid: { display: false }
               }
             }
-          }
-
-        });
-        
+          } 
+          
+        })
       } else if (type === "insufficienze") {
         const datasets = [{
           label: "Insufficienze (<6)",
@@ -976,6 +1272,12 @@
       };
       reader.readAsText(file);
     });
+    
+    document.getElementById('clearCacheBtn').addEventListener('click', function () {
+      localStorage.removeItem('csvDataCache');
+      location.reload(); // (facoltativo) ricarica la pagina per ripristinare lo stato iniziale
+    });
+
     
     // Al caricamento pagina: se c'è cache, la usa, altrimenti prova a caricare "miei.csv"
     const cached = localStorage.getItem('csvDataCache');
