@@ -306,7 +306,20 @@
       overflow: hidden;
     }
     
-    
+    .ignore-blur-btn {
+      all: unset; /* rimuove tutti gli stili nativi del bottone */
+      color: #4A90E2;
+      cursor: pointer;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.95rem;
+      text-decoration: underline;
+      margin-top: 1rem;
+    }
+    .ignore-blur-btn:hover {
+      text-decoration: none;
+    }
+
+
     #chartContainer {
       width: 100%;   /* qui verrà sovrascritto dinamicamente in JS */
       height: 100%;
@@ -391,6 +404,7 @@
     <div class="rotate-warning">
       <span class="material-symbols-outlined">screen_rotation</span>
       <p>Ruota il telefono per un'esperienza migliore</p>
+      <button id="ignoreBlurBtn" class="ignore-blur-btn">Ignora</button>
     </div>
   </div>
 
@@ -639,6 +653,21 @@
       });
     }
 
+
+    const ignoreBtn = document.getElementById('ignoreBlurBtn');
+    const chartContainer = document.getElementById('chartContainer');
+    const rotateWarning = document.querySelector('.rotate-warning');
+    
+    ignoreBtn?.addEventListener('click', () => {
+      chartContainer.style.filter = 'none';
+      rotateWarning.style.display = 'none';
+      localStorage.setItem('blurIgnored', 'true');
+    });
+    
+    if (localStorage.getItem('blurIgnored') === 'true') {
+      chartContainer.style.filter = 'none';
+      rotateWarning.style.display = 'none';
+    }
 
     
     let allData = [];         // contiene tutti i dati CSV come array di oggetti
