@@ -1,340 +1,339 @@
-MATERIA,DATA,VOTO,TIPO,MESE,Q,A
-Italiano,2 Oct 20,5,Scritto,Oct,1,1
-Inglese,14 Oct 20,7.85,Scritto,Oct,1,1
-Scienze,19 Oct 20,4.85,Orale,Oct,1,1
-Tedesco,23 Oct 20,8.5,Scritto,Oct,1,1
-Informatica,3 Nov 20,5.15,Orale,Nov,1,1
-Tedesco,10 Nov 20,7.5,Orale,Nov,1,1
-Matematica,11 Nov 20,6.5,Orale,Nov,1,1
-Geografia,13 Nov 20,6,Orale,Nov,1,1
-Italiano,16 Nov 20,7.15,Orale,Nov,1,1
-Storia,30 Nov 20,7.5,Orale,Nov,1,1
-Economia aziendale,30 Nov 20,4.5,Orale,Nov,1,1
-Informatica,1 Dec 20,5.5,Orale,Dec,1,1
-Inglese,3 Dec 20,7.5,Orale,Dec,1,1
-Geografia,4 Dec 20,6.15,Orale,Dec,1,1
-Educazione fisica,9 Dec 20,4.5,Orale,Dec,1,1
-Inglese,10 Dec 20,7.5,Scritto,Dec,1,1
-Scienze,11 Dec 20,9,Orale,Dec,1,1
-Matematica,15 Dec 20,6.5,Scritto,Dec,1,1
-Educazione fisica,16 Dec 20,7.5,Orale,Dec,1,1
-Diritto,16 Dec 20,6.85,Orale,Dec,1,1
-Fisica,17 Dec 20,8,Scritto,Dec,1,1
-Informatica,22 Dec 20,6,Orale,Dec,1,1
-Italiano,7 Jan 21,7.15,Scritto,Jan,1,1
-Inglese,8 Jan 21,7,Scritto,Jan,1,1
-Geografia,15 Jan 21,4,Orale,Jan,1,1
-Storia,18 Jan 21,6.15,Orale,Jan,1,1
-Matematica,18 Jan 21,5,Scritto,Jan,1,1
-Economia aziendale,18 Jan 21,4.85,Scritto,Jan,1,1
-Educazione fisica,20 Jan 21,7.5,Orale,Jan,1,1
-Storia,21 Jan 21,4.5,Orale,Jan,1,1
-Italiano,27 Jan 21,6,Orale,Jan,1,1
-Inglese,28 Jan 21,10,Orale,Jan,1,1
-Fisica,28 Jan 21,7.15,Scritto,Jan,1,1
-Educazione civica,29 Jan 21,8,Orale,Jan,1,1
-Scienze,29 Jan 21,5,Orale,Jan,1,1
-Tedesco,9 Feb 21,5.5,Scritto,Feb,2,1
-Inglese,18 Feb 21,6.5,Scritto,Feb,2,1
-Italiano,18 Feb 21,4,Scritto,Feb,2,1
-Inglese,19 Feb 21,6.5,Orale,Feb,2,1
-Matematica,1 Mar 21,5.5,Scritto,Mar,2,1
-Storia,4 Mar 21,8,Orale,Mar,2,1
-Geografia,5 Mar 21,10,Orale,Mar,2,1
-Scienze,9 Mar 21,7,Scritto,Mar,2,1
-Scienze,12 Mar 21,7,Scritto,Mar,2,1
-Italiano,18 Mar 21,6.5,Orale,Mar,2,1
-Geografia,19 Mar 21,7.5,Orale,Mar,2,1
-Scienze,19 Mar 21,5.5,Scritto,Mar,2,1
-Informatica,23 Mar 21,8,Orale,Mar,2,1
-Italiano,25 Mar 21,6.15,Scritto,Mar,2,1
-Tedesco,26 Mar 21,5.5,Orale,Mar,2,1
-Economia aziendale,29 Mar 21,6.15,Scritto,Mar,2,1
-Matematica,30 Mar 21,6.5,Orale,Mar,2,1
-Scienze,9 Apr 21,7.5,Orale,Apr,2,1
-Diritto,14 Apr 21,7.5,Orale,Apr,2,1
-Educazione fisica,14 Apr 21,4.5,Scritto,Apr,2,1
-Fisica,22 Apr 21,8.85,Scritto,Apr,2,1
-Storia,26 Apr 21,6,Orale,Apr,2,1
-Geografia,30 Apr 21,8.85,Orale,Apr,2,1
-Tedesco,30 Apr 21,6,Scritto,Apr,2,1
-Informatica,4 May 21,9.15,Pratico,May,2,1
-Scienze,4 May 21,8.5,Orale,May,2,1
-Inglese,6 May 21,8,Scritto,May,2,1
-Educazione civica,7 May 21,7.5,Orale,May,2,1
-Storia,13 May 21,7,Orale,May,2,1
-Diritto,17 May 21,7.5,Orale,May,2,1
-Economia aziendale,17 May 21,6.5,Scritto,May,2,1
-Matematica,17 May 21,5.15,Scritto,May,2,1
-Geografia,18 May 21,8,Orale,May,2,1
-Matematica,18 May 21,6.5,Orale,May,2,1
-Educazione civica,18 May 21,6,Orale,May,2,1
-Educazione fisica,19 May 21,7.5,Orale,May,2,1
-Italiano,19 May 21,7,Orale,May,2,1
-Scienze,21 May 21,9,Pratico,May,2,1
-Educazione fisica,26 May 21,7.5,Scritto,May,2,1
-Fisica,27 May 21,8,Scritto,May,2,1
-Educazione civica,28 May 21,9,Scritto,May,2,1
-Economia aziendale,31 May 21,7,Orale,May,2,1
-Diritto,7 Oct 21,6.5,Orale,Oct,1,2
-Tedesco,18 Oct 21,3.5,Scritto,Oct,1,2
-Matematica,20 Oct 21,6,Scritto,Oct,1,2
-Chimica,21 Oct 21,6.5,Scritto,Oct,1,2
-Educazione civica,25 Oct 21,9,Scritto,Oct,1,2
-Geografia,25 Oct 21,9,Scritto,Oct,1,2
-Chimica,25 Oct 21,9,Scritto,Oct,1,2
-Italiano,28 Oct 21,4,Scritto,Oct,1,2
-Storia,29 Oct 21,5.85,Scritto,Oct,1,2
-Biologia,4 Nov 21,9,Scritto,Nov,1,2
-Economia aziendale,4 Nov 21,6.15,Scritto,Nov,1,2
-Informatica,10 Nov 21,9.15,Scritto,Nov,1,2
-Biologia,10 Nov 21,5,Orale,Nov,1,2
-Matematica,17 Nov 21,6.85,Orale,Nov,1,2
-Tedesco,18 Nov 21,3,Orale,Nov,1,2
-Italiano,19 Nov 21,7,Scritto,Nov,1,2
-Inglese,22 Nov 21,6.5,Orale,Nov,1,2
-Tedesco,22 Nov 21,5.5,Scritto,Nov,1,2
-Geografia,30 Nov 21,6.15,Scritto,Nov,1,2
-Matematica,9 Dec 21,7.5,Scritto,Dec,1,2
-Inglese,14 Dec 21,8.5,Scritto,Dec,1,2
-Informatica,15 Dec 21,7.85,Scritto,Dec,1,2
-Diritto,17 Dec 21,9.5,Orale,Dec,1,2
-Educazione fisica,17 Dec 21,6,Pratico,Dec,1,2
-Educazione civica,20 Dec 21,7.5,Orale,Dec,1,2
-Italiano,21 Dec 21,5.85,Scritto,Dec,1,2
-Chimica,22 Dec 21,9,Scritto,Dec,1,2
-Economia aziendale,22 Dec 21,7.5,Scritto,Dec,1,2
-Biologia,12 Jan 22,4.5,Scritto,Jan,1,2
-Storia,13 Jan 22,5.5,Orale,Jan,1,2
-Chimica,17 Jan 22,9,Orale,Jan,1,2
-Italiano,18 Jan 22,4,Scritto,Jan,1,2
-Informatica,19 Jan 22,7.85,Scritto,Jan,1,2
-Italiano,21 Jan 22,6,Orale,Jan,1,2
-Tedesco,24 Jan 22,6.5,Scritto,Jan,1,2
-Matematica,26 Jan 22,6.85,Scritto,Jan,1,2
-Educazione civica,28 Jan 22,7,Orale,Jan,1,2
-Inglese,31 Jan 22,10,Scritto,Jan,2,2
-Geografia,1 Feb 22,6.15,Orale,Feb,2,2
-Inglese,8 Feb 22,8.5,Scritto,Feb,2,2
-Geografia,15 Feb 22,6.85,Orale,Feb,2,2
-Tedesco,24 Feb 22,5.5,Orale,Feb,2,2
-Italiano,25 Feb 22,6.85,Scritto,Feb,2,2
-Storia,4 Mar 22,6.15,Scritto,Mar,2,2
-Informatica,9 Mar 22,7,Scritto,Mar,2,2
-Tedesco,14 Mar 22,4.5,Scritto,Mar,2,2
-Inglese,15 Mar 22,7,Scritto,Mar,2,2
-Matematica,16 Mar 22,5.85,Scritto,Mar,2,2
-Economia aziendale,17 Mar 22,6.15,Scritto,Mar,2,2
-Italiano,22 Mar 22,4.85,Scritto,Mar,2,2
-Biologia,23 Mar 22,10,Scritto,Mar,2,2
-Diritto,25 Mar 22,9.85,Orale,Mar,2,2
-Inglese,28 Mar 22,10,Scritto,Mar,2,2
-Chimica,28 Mar 22,9,Orale,Mar,2,2
-Biologia,31 Mar 22,10,Scritto,Mar,2,2
-Matematica,7 Apr 22,5,Scritto,Apr,2,2
-Educazione fisica,8 Apr 22,6,Pratico,Apr,2,2
-Biologia,13 Apr 22,8.15,Orale,Apr,2,2
-Italiano,22 Apr 22,7,Scritto,Apr,2,2
-Educazione fisica,22 Apr 22,6,Pratico,Apr,2,2
-Geografia,26 Apr 22,7.5,Scritto,Apr,2,2
-Informatica,27 Apr 22,5,Scritto,Apr,2,2
-Storia,28 Apr 22,6.15,Orale,Apr,2,2
-Educazione civica,5 May 22,9,Scritto,May,2,2
-Educazione civica,6 May 22,10,Orale,May,2,2
-Chimica,9 May 22,7.5,Scritto,May,2,2
-Biologia,12 May 22,9,Scritto,May,2,2
-Educazione fisica,13 May 22,7.5,Pratico,May,2,2
-Tedesco,16 May 22,5.5,Orale,May,2,2
-Tedesco,16 May 22,4.5,Scritto,May,2,2
-Inglese,17 May 22,9,Scritto,May,2,2
-Geografia,17 May 22,8.15,Orale,May,2,2
-Informatica,18 May 22,9,Scritto,May,2,2
-Matematica,18 May 22,7.5,Scritto,May,2,2
-Diritto,20 May 22,9,Orale,May,2,2
-Storia,25 May 22,7.5,Orale,May,2,2
-Economia aziendale,26 May 22,6,Orale,May,2,2
-Chimica,30 May 22,8.5,Orale,May,2,2
-Inglese,31 May 22,6.15,Orale,May,2,2
-Italiano,1 Jun 22,7,Orale,Jun,2,2
-Educazione fisica,3 Jun 22,7.5,Scritto,Jun,2,2
-Educazione civica,6 Jun 22,7.5,Orale,Jun,2,2
-Economia aziendale,28 Sep 22,6.5,Scritto,Sep,1,3
-Storia,11 Oct 22,7,Orale,Oct,1,3
-Italiano,18 Oct 22,6,Scritto,Oct,1,3
-Tedesco,25 Oct 22,6,Scritto,Oct,1,3
-Matematica,3 Nov 22,3,Scritto,Nov,1,3
-Informatica,4 Nov 22,9.15,Scritto,Nov,1,3
-Economia aziendale,7 Nov 22,4,Orale,Nov,1,3
-Economia politica,11 Nov 22,7,Orale,Nov,1,3
-Italiano,15 Nov 22,7,Orale,Nov,1,3
-Matematica,17 Nov 22,4,Orale,Nov,1,3
-Diritto,19 Nov 22,6,Orale,Nov,1,3
-Tedesco,22 Nov 22,7,Orale,Nov,1,3
-Inglese,23 Nov 22,7,Scritto,Nov,1,3
-Economia aziendale,5 Dec 22,7.5,Scritto,Dec,1,3
-Inglese,6 Dec 22,6.5,Orale,Dec,1,3
-Italiano,13 Dec 22,5.5,Scritto,Dec,1,3
-Educazione civica,14 Dec 22,7.5,Orale,Dec,1,3
-Educazione fisica,19 Dec 22,7,Orale,Dec,1,3
-Tedesco,20 Dec 22,4,Scritto,Dec,1,3
-Economia politica,21 Dec 22,6.5,Orale,Dec,1,3
-Matematica,22 Dec 22,7,Scritto,Dec,1,3
-Informatica,10 Jan 23,7.85,Scritto,Jan,1,3
-Diritto,12 Jan 23,6,Orale,Jan,1,3
-Educazione civica,17 Jan 23,8,Orale,Jan,1,3
-Storia,18 Jan 23,7,Orale,Jan,1,3
-Educazione civica,23 Jan 23,7.5,Orale,Jan,1,3
-Matematica,26 Jan 23,6,Orale,Jan,1,3
-Educazione fisica,30 Jan 23,7,Orale,Jan,1,3
-Economia aziendale,27 Feb 23,6.15,Orale,Feb,2,3
-Educazione civica,14 Mar 23,7.5,Scritto,Mar,2,3
-Italiano,14 Mar 23,7.15,Scritto,Mar,2,3
-Diritto,15 Mar 23,6,Orale,Mar,2,3
-Matematica,16 Mar 23,4,Scritto,Mar,2,3
-Economia politica,20 Mar 23,6,Orale,Mar,2,3
-Tedesco,21 Mar 23,6.15,Scritto,Mar,2,3
-Informatica,24 Mar 23,9,Scritto,Mar,2,3
-Tedesco,31 Mar 23,5,Orale,Mar,2,3
-Storia,3 Apr 23,5,Orale,Apr,2,3
-Economia aziendale,3 Apr 23,2,Orale,Apr,2,3
-Inglese,5 Apr 23,8.5,Orale,Apr,2,3
-Matematica,13 Apr 23,8,Orale,Apr,2,3
-Educazione fisica,17 Apr 23,9,Orale,Apr,2,3
-Educazione civica,17 Apr 23,8.15,Scritto,Apr,2,3
-Educazione fisica,17 Apr 23,8,Pratico,Apr,2,3
-Diritto,20 Apr 23,7,Orale,Apr,2,3
-Italiano,20 Apr 23,5,Orale,Apr,2,3
-Tedesco,9 May 23,8,Scritto,May,2,3
-Italiano,9 May 23,7,Scritto,May,2,3
-Inglese,10 May 23,6,Scritto,May,2,3
-Economia politica,12 May 23,6.5,Orale,May,2,3
-Educazione fisica,15 May 23,7.5,Pratico,May,2,3
-Informatica,16 May 23,7,Scritto,May,2,3
-Matematica,18 May 23,5.5,Scritto,May,2,3
-Economia aziendale,24 May 23,8,Orale,May,2,3
-Economia aziendale,29 May 23,9,Orale,May,2,3
-Tedesco,30 May 23,8.5,Scritto,May,2,3
-Educazione civica,30 May 23,8,Orale,May,2,3
-Informatica,30 May 23,7.5,Orale,May,2,3
-Economia aziendale,5 Jun 23,8.5,Scritto,Jun,2,3
-Educazione civica,6 Jun 23,8,Orale,Jun,2,3
-Storia,7 Jun 23,7,Orale,Jun,2,3
-Italiano,12 Oct 23,7.5,Scritto,Oct,1,4
-Matematica,17 Oct 23,8.5,Orale,Oct,1,4
-Economia aziendale,18 Oct 23,8,Scritto,Oct,1,4
-Informatica,19 Oct 23,10,Scritto,Oct,1,4
-Educazione fisica,27 Oct 23,8,Pratico,Oct,1,4
-Economia politica,2 Nov 23,7,Orale,Nov,1,4
-Storia,3 Nov 23,7.85,Scritto,Nov,1,4
-Italiano,8 Nov 23,9,Orale,Nov,1,4
-Diritto,10 Nov 23,7,Orale,Nov,1,4
-Inglese,13 Nov 23,7.5,Scritto,Nov,1,4
-Matematica,14 Nov 23,6,Scritto,Nov,1,4
-Educazione civica,20 Nov 23,7.85,Scritto,Nov,1,4
-Economia aziendale,22 Nov 23,7.15,Orale,Nov,1,4
-Educazione fisica,24 Nov 23,8,Pratico,Nov,1,4
-Informatica,27 Nov 23,8.85,Scritto,Nov,1,4
-Italiano,30 Nov 23,7.85,Scritto,Nov,1,4
-Inglese,5 Dec 23,9,Orale,Dec,1,4
-Educazione civica,6 Dec 23,8.15,Orale,Dec,1,4
-Italiano,14 Dec 23,8,Scritto,Dec,1,4
-Educazione civica,15 Dec 23,8,Scritto,Dec,1,4
-Economia politica,9 Jan 24,7,Orale,Jan,1,4
-Diritto,11 Jan 24,7,Orale,Jan,1,4
-Storia,12 Jan 24,8,Scritto,Jan,1,4
-Educazione civica,12 Jan 24,7.5,Orale,Jan,1,4
-Matematica,18 Jan 24,3,Scritto,Jan,1,4
-Educazione fisica,19 Jan 24,8,Orale,Jan,1,4
-Informatica,24 Jan 24,10,Orale,Jan,1,4
-Economia aziendale,24 Jan 24,7.15,Scritto,Jan,1,4
-Italiano,25 Jan 24,8,Scritto,Jan,1,4
-Educazione civica,26 Jan 24,8.5,Orale,Jan,1,4
-Inglese,30 Jan 24,6.85,Scritto,Jan,1,4
-Matematica,30 Jan 24,4,Orale,Jan,1,4
-Inglese,13 Feb 24,8.5,Orale,Feb,2,4
-Italiano,15 Feb 24,6,Scritto,Feb,2,4
-Educazione fisica,23 Feb 24,9,Orale,Feb,2,4
-Diritto,29 Feb 24,7,Orale,Feb,2,4
-Informatica,29 Feb 24,5,Scritto,Feb,2,4
-Educazione fisica,1 Mar 24,7.15,Pratico,Mar,2,4
-Italiano,8 Mar 24,7.5,Orale,Mar,2,4
-Economia politica,8 Mar 24,6.5,Orale,Mar,2,4
-Matematica,12 Mar 24,7,Orale,Mar,2,4
-Inglese,14 Mar 24,9,Scritto,Mar,2,4
-Economia aziendale,18 Mar 24,4.85,Scritto,Mar,2,4
-Storia,20 Mar 24,7.5,Scritto,Mar,2,4
-Italiano,27 Mar 24,8,Scritto,Mar,2,4
-Informatica,5 Apr 24,5,Scritto,Apr,2,4
-Matematica,9 Apr 24,3,Scritto,Apr,2,4
-Economia politica,17 Apr 24,7,Orale,Apr,2,4
-Inglese,22 Apr 24,8,Scritto,Apr,2,4
-Inglese,23 Apr 24,9.5,Orale,Apr,2,4
-Economia aziendale,29 Apr 24,4.5,Scritto,Apr,2,4
-Storia,3 May 24,7.5,Scritto,May,2,4
-Informatica,9 May 24,5.5,Orale,May,2,4
-Italiano,10 May 24,8,Scritto,May,2,4
-Diritto,10 May 24,7,Orale,May,2,4
-Informatica,9 Oct 24,5.5,Scritto,Oct,1,5
-Economia aziendale,15 Oct 24,5,Scritto,Oct,1,5
-Inglese,21 Oct 24,9,Orale,Oct,1,5
-Diritto,29 Oct 24,7,Orale,Oct,1,5
-Informatica,30 Oct 24,9,Scritto,Oct,1,5
-Storia,31 Oct 24,7.5,Orale,Oct,1,5
-Italiano,31 Oct 24,7,Scritto,Oct,1,5
-Educazione fisica,6 Nov 24,9,Scritto,Nov,1,5
-Educazione fisica,6 Nov 24,9,Pratico,Nov,1,5
-Matematica,11 Nov 24,5,Orale,Nov,1,5
-Italiano,13 Nov 24,8,Orale,Nov,1,5
-Economia aziendale,18 Nov 24,4.5,Orale,Nov,1,5
-Economia politica,21 Nov 24,5,Orale,Nov,1,5
-Inglese,22 Nov 24,7.5,Scritto,Nov,1,5
-Educazione civica,10 Dec 24,6,Scritto,Dec,1,5
-Italiano,12 Dec 24,7,Scritto,Dec,1,5
-Diritto,17 Dec 24,5.5,Orale,Dec,1,5
-Informatica,18 Dec 24,7.15,Orale,Dec,1,5
-Economia aziendale,18 Dec 24,4.85,Scritto,Dec,1,5
-Educazione civica,10 Jan 25,7.5,Scritto,Jan,1,5
-Matematica,10 Jan 25,3.5,Scritto,Jan,1,5
-Economia politica,14 Jan 25,6.5,Orale,Jan,1,5
-Educazione civica,16 Jan 25,8.15,Scritto,Jan,1,5
-Storia,17 Jan 25,6,Scritto,Jan,1,5
-Economia aziendale,21 Jan 25,3.5,Orale,Jan,1,5
-Educazione fisica,22 Jan 25,7,Pratico,Jan,1,5
-Educazione civica,22 Jan 25,7,Pratico,Jan,1,5
-Inglese,24 Jan 25,9,Scritto,Jan,1,5
-Economia aziendale,30 Jan 25,6,Orale,Jan,1,5
-Inglese,17 Feb 25,9,Orale,Feb,2,5
-Diritto,25 Feb 25,4.5,Orale,Feb,2,5
-Matematica,26 Feb 25,7,Orale,Feb,2,5
-Educazione fisica,5 Mar 25,8.15,Pratico,Mar,2,5
-Economia aziendale,5 Mar 25,6,Scritto,Mar,2,5
-Italiano,5 Mar 25,5,Scritto,Mar,2,5
-Diritto,11 Mar 25,5.5,Orale,Mar,2,5
-Informatica,12 Mar 25,6.5,Scritto,Mar,2,5
-Storia,18 Mar 25,6.15,Scritto,Mar,2,5
-Economia politica,18 Mar 25,5.85,Orale,Mar,2,5
-Inglese,31 Mar 25,7.5,Scritto,Mar,2,5
-Informatica,31 Mar 25,7.15,Orale,Mar,2,5
-Italiano,1 Apr 25,6.85,Scritto,Apr,2,5
-Economia politica,1 Apr 25,6.5,Orale,Apr,2,5
-Italiano,3 Apr 25,7.15,Scritto,Apr,2,5
-Matematica,7 Apr 25,3,Scritto,Apr,2,5
-Economia aziendale,8 Apr 25,5,Orale,Apr,2,5
-Educazione fisica,9 Apr 25,9.15,Orale,Apr,2,5
-Informatica,16 Apr 25,6.5,Scritto,Apr,2,5
-Economia aziendale,29 Apr 25,5.85,Orale,Apr,2,5
-Educazione fisica,30 Apr 25,7.15,Pratico,Apr,2,5
-Italiano,30 Apr 25,6.5,Scritto,Apr,2,5
-Educazione civica,4 May 25,9.5,Scritto,May,2,5
-Matematica,5 May 25,5,Orale,May,2,5
-Italiano,7 May 25,7,Scritto,May,2,5
-Inglese,12 May 25,10,Orale,May,2,5
-Matematica,14 May 25,7,Orale,May,2,5
-Informatica,14 May 25,5.5,Scritto,May,2,5
-Informatica,21 May 25,5,Orale,May,2,5
-Storia,22 May 25,9,Scritto,May,2,5
-Inglese,23 May 25,9.15,Scritto,May,2,5
-Italiano,23 May 25,7,Scritto,May,2,5
-Economia aziendale,27 May 25,5.85,Orale,May,2,5
-Diritto,27 May 25,5.5,Orale,May,2,5
-Diritto,29 May 25,5,Scritto,May,2,5
+INDEX,MATERIA,DATA,VOTO,TIPO,MESE,Q,A
+1,Italiano,2 Oct 20,5,Scritto,Oct,1,1
+2,Inglese,14 Oct 20,7.85,Scritto,Oct,1,1
+3,Scienze,19 Oct 20,4.85,Orale,Oct,1,1
+4,Tedesco,23 Oct 20,8.5,Scritto,Oct,1,1
+5,Informatica,3 Nov 20,5.15,Orale,Nov,1,1
+6,Tedesco,10 Nov 20,7.5,Orale,Nov,1,1
+7,Matematica,11 Nov 20,6.5,Orale,Nov,1,1
+8,Geografia,13 Nov 20,6,Orale,Nov,1,1
+9,Italiano,16 Nov 20,7.15,Orale,Nov,1,1
+10,Storia,30 Nov 20,7.5,Orale,Nov,1,1
+11,Economia aziendale,30 Nov 20,4.5,Orale,Nov,1,1
+12,Informatica,1 Dec 20,5.5,Orale,Dec,1,1
+13,Inglese,3 Dec 20,7.5,Orale,Dec,1,1
+14,Geografia,4 Dec 20,6.15,Orale,Dec,1,1
+15,Educazione fisica,9 Dec 20,4.5,Orale,Dec,1,1
+16,Inglese,10 Dec 20,7.5,Scritto,Dec,1,1
+17,Scienze,11 Dec 20,9,Orale,Dec,1,1
+18,Matematica,15 Dec 20,6.5,Scritto,Dec,1,1
+19,Educazione fisica,16 Dec 20,7.5,Orale,Dec,1,1
+20,Diritto,16 Dec 20,6.85,Orale,Dec,1,1
+21,Fisica,17 Dec 20,8,Scritto,Dec,1,1
+22,Informatica,22 Dec 20,6,Orale,Dec,1,1
+23,Italiano,7 Jan 21,7.15,Scritto,Jan,1,1
+24,Inglese,8 Jan 21,7,Scritto,Jan,1,1
+25,Geografia,15 Jan 21,4,Orale,Jan,1,1
+26,Storia,18 Jan 21,6.15,Orale,Jan,1,1
+27,Matematica,18 Jan 21,5,Scritto,Jan,1,1
+28,Economia aziendale,18 Jan 21,4.85,Scritto,Jan,1,1
+29,Educazione fisica,20 Jan 21,7.5,Orale,Jan,1,1
+30,Storia,21 Jan 21,4.5,Orale,Jan,1,1
+31,Italiano,27 Jan 21,6,Orale,Jan,1,1
+32,Inglese,28 Jan 21,10,Orale,Jan,1,1
+33,Fisica,28 Jan 21,7.15,Scritto,Jan,1,1
+34,Scienze,29 Jan 21,5,Orale,Jan,1,1
+35,Educazione civica,29 Jan 21,8,Orale,Jan,1,1
+36,Tedesco,9 Feb 21,5.5,Scritto,Feb,2,1
+37,Italiano,18 Feb 21,4,Scritto,Feb,2,1
+38,Inglese,18 Feb 21,6.5,Scritto,Feb,2,1
+39,Inglese,19 Feb 21,6.5,Orale,Feb,2,1
+40,Matematica,1 Mar 21,5.5,Scritto,Mar,2,1
+41,Storia,4 Mar 21,8,Orale,Mar,2,1
+42,Geografia,5 Mar 21,10,Orale,Mar,2,1
+43,Scienze,9 Mar 21,7,Scritto,Mar,2,1
+44,Scienze,12 Mar 21,7,Scritto,Mar,2,1
+45,Italiano,18 Mar 21,6.5,Orale,Mar,2,1
+46,Scienze,19 Mar 21,5.5,Scritto,Mar,2,1
+47,Geografia,19 Mar 21,7.5,Orale,Mar,2,1
+48,Informatica,23 Mar 21,8,Orale,Mar,2,1
+49,Italiano,25 Mar 21,6.15,Scritto,Mar,2,1
+50,Tedesco,26 Mar 21,5.5,Orale,Mar,2,1
+51,Economia aziendale,29 Mar 21,6.15,Scritto,Mar,2,1
+52,Matematica,30 Mar 21,6.5,Orale,Mar,2,1
+53,Scienze,9 Apr 21,7.5,Orale,Apr,2,1
+54,Educazione fisica,14 Apr 21,4.5,Scritto,Apr,2,1
+55,Diritto,14 Apr 21,7.5,Orale,Apr,2,1
+56,Fisica,22 Apr 21,8.85,Scritto,Apr,2,1
+57,Storia,26 Apr 21,6,Orale,Apr,2,1
+58,Tedesco,30 Apr 21,6,Scritto,Apr,2,1
+59,Geografia,30 Apr 21,8.85,Orale,Apr,2,1
+60,Scienze,4 May 21,8.5,Orale,May,2,1
+61,Informatica,4 May 21,9.15,Pratico,May,2,1
+62,Inglese,6 May 21,8,Scritto,May,2,1
+63,Educazione civica,7 May 21,7.5,Orale,May,2,1
+64,Storia,13 May 21,7,Orale,May,2,1
+65,Matematica,17 May 21,5.15,Scritto,May,2,1
+66,Economia aziendale,17 May 21,6.5,Scritto,May,2,1
+67,Diritto,17 May 21,7.5,Orale,May,2,1
+68,Matematica,18 May 21,6.5,Orale,May,2,1
+69,Geografia,18 May 21,8,Orale,May,2,1
+70,Educazione civica,18 May 21,6,Orale,May,2,1
+71,Italiano,19 May 21,7,Orale,May,2,1
+72,Educazione fisica,19 May 21,7.5,Orale,May,2,1
+73,Scienze,21 May 21,9,Pratico,May,2,1
+74,Educazione fisica,26 May 21,7.5,Scritto,May,2,1
+75,Fisica,27 May 21,8,Scritto,May,2,1
+76,Educazione civica,28 May 21,9,Scritto,May,2,1
+77,Economia aziendale,31 May 21,7,Orale,May,2,1
+78,Diritto,7 Oct 21,6.5,Orale,Oct,1,2
+79,Tedesco,18 Oct 21,3.5,Scritto,Oct,1,2
+80,Matematica,20 Oct 21,6,Scritto,Oct,1,2
+81,Chimica,21 Oct 21,6.5,Scritto,Oct,1,2
+82,Geografia,25 Oct 21,9,Scritto,Oct,1,2
+83,Educazione civica,25 Oct 21,9,Scritto,Oct,1,2
+84,Chimica,25 Oct 21,9,Scritto,Oct,1,2
+85,Italiano,28 Oct 21,4,Scritto,Oct,1,2
+86,Storia,29 Oct 21,5.85,Scritto,Oct,1,2
+87,Economia aziendale,4 Nov 21,6.15,Scritto,Nov,1,2
+88,Biologia,4 Nov 21,9,Scritto,Nov,1,2
+89,Informatica,10 Nov 21,9.15,Scritto,Nov,1,2
+90,Biologia,10 Nov 21,5,Orale,Nov,1,2
+91,Matematica,17 Nov 21,6.85,Orale,Nov,1,2
+92,Tedesco,18 Nov 21,3,Orale,Nov,1,2
+93,Italiano,19 Nov 21,7,Scritto,Nov,1,2
+94,Tedesco,22 Nov 21,5.5,Scritto,Nov,1,2
+95,Inglese,22 Nov 21,6.5,Orale,Nov,1,2
+96,Geografia,30 Nov 21,6.15,Scritto,Nov,1,2
+97,Matematica,9 Dec 21,7.5,Scritto,Dec,1,2
+98,Inglese,14 Dec 21,8.5,Scritto,Dec,1,2
+99,Informatica,15 Dec 21,7.85,Scritto,Dec,1,2
+100,Educazione fisica,17 Dec 21,6,Pratico,Dec,1,2
+101,Diritto,17 Dec 21,9.5,Orale,Dec,1,2
+102,Educazione civica,20 Dec 21,7.5,Orale,Dec,1,2
+103,Italiano,21 Dec 21,5.85,Scritto,Dec,1,2
+104,Economia aziendale,22 Dec 21,7.5,Scritto,Dec,1,2
+105,Chimica,22 Dec 21,9,Scritto,Dec,1,2
+106,Biologia,12 Jan 22,4.5,Scritto,Jan,1,2
+107,Storia,13 Jan 22,5.5,Orale,Jan,1,2
+108,Chimica,17 Jan 22,9,Orale,Jan,1,2
+109,Italiano,18 Jan 22,4,Scritto,Jan,1,2
+110,Informatica,19 Jan 22,7.85,Scritto,Jan,1,2
+111,Italiano,21 Jan 22,6,Orale,Jan,1,2
+112,Tedesco,24 Jan 22,6.5,Scritto,Jan,1,2
+113,Matematica,26 Jan 22,6.85,Scritto,Jan,1,2
+114,Educazione civica,28 Jan 22,7,Orale,Jan,1,2
+115,Inglese,31 Jan 22,10,Scritto,Jan,2,2
+116,Geografia,1 Feb 22,6.15,Orale,Feb,2,2
+117,Inglese,8 Feb 22,8.5,Scritto,Feb,2,2
+118,Geografia,15 Feb 22,6.85,Orale,Feb,2,2
+119,Tedesco,24 Feb 22,5.5,Orale,Feb,2,2
+120,Italiano,25 Feb 22,6.85,Scritto,Feb,2,2
+121,Storia,4 Mar 22,6.15,Scritto,Mar,2,2
+122,Informatica,9 Mar 22,7,Scritto,Mar,2,2
+123,Tedesco,14 Mar 22,4.5,Scritto,Mar,2,2
+124,Inglese,15 Mar 22,7,Scritto,Mar,2,2
+125,Matematica,16 Mar 22,5.85,Scritto,Mar,2,2
+126,Economia aziendale,17 Mar 22,6.15,Scritto,Mar,2,2
+127,Italiano,22 Mar 22,4.85,Scritto,Mar,2,2
+128,Biologia,23 Mar 22,10,Scritto,Mar,2,2
+129,Diritto,25 Mar 22,9.85,Orale,Mar,2,2
+130,Inglese,28 Mar 22,10,Scritto,Mar,2,2
+131,Chimica,28 Mar 22,9,Orale,Mar,2,2
+132,Biologia,31 Mar 22,10,Scritto,Mar,2,2
+133,Matematica,7 Apr 22,5,Scritto,Apr,2,2
+134,Educazione fisica,8 Apr 22,6,Pratico,Apr,2,2
+135,Biologia,13 Apr 22,8.15,Orale,Apr,2,2
+136,Italiano,22 Apr 22,7,Scritto,Apr,2,2
+137,Educazione fisica,22 Apr 22,6,Pratico,Apr,2,2
+138,Geografia,26 Apr 22,7.5,Scritto,Apr,2,2
+139,Informatica,27 Apr 22,5,Scritto,Apr,2,2
+140,Storia,28 Apr 22,6.15,Orale,Apr,2,2
+141,Educazione civica,5 May 22,9,Scritto,May,2,2
+142,Educazione civica,6 May 22,10,Orale,May,2,2
+143,Chimica,9 May 22,7.5,Scritto,May,2,2
+144,Biologia,12 May 22,9,Scritto,May,2,2
+145,Educazione fisica,13 May 22,7.5,Pratico,May,2,2
+146,Tedesco,16 May 22,5.5,Orale,May,2,2
+147,Tedesco,16 May 22,4.5,Scritto,May,2,2
+148,Inglese,17 May 22,9,Scritto,May,2,2
+149,Geografia,17 May 22,8.15,Orale,May,2,2
+150,Matematica,18 May 22,7.5,Scritto,May,2,2
+151,Informatica,18 May 22,9,Scritto,May,2,2
+152,Diritto,20 May 22,9,Orale,May,2,2
+153,Storia,25 May 22,7.5,Orale,May,2,2
+154,Economia aziendale,26 May 22,6,Orale,May,2,2
+155,Chimica,30 May 22,8.5,Orale,May,2,2
+156,Inglese,31 May 22,6.15,Orale,May,2,2
+157,Italiano,1 Jun 22,7,Orale,Jun,2,2
+158,Educazione fisica,3 Jun 22,7.5,Scritto,Jun,2,2
+159,Educazione civica,6 Jun 22,7.5,Orale,Jun,2,2
+160,Economia aziendale,28 Sep 22,6.5,Scritto,Sep,1,3
+161,Storia,11 Oct 22,7,Orale,Oct,1,3
+162,Italiano,18 Oct 22,6,Scritto,Oct,1,3
+163,Tedesco,25 Oct 22,6,Scritto,Oct,1,3
+164,Matematica,3 Nov 22,3,Scritto,Nov,1,3
+165,Diritto,3 Nov 22,6,Orale,Nov,1,3
+166,Informatica,4 Nov 22,9.15,Scritto,Nov,1,3
+167,Economia aziendale,7 Nov 22,4,Orale,Nov,1,3
+168,Economia politica,11 Nov 22,7,Orale,Nov,1,3
+169,Italiano,15 Nov 22,7,Orale,Nov,1,3
+170,Matematica,17 Nov 22,4,Orale,Nov,1,3
+171,Tedesco,22 Nov 22,7,Orale,Nov,1,3
+172,Inglese,23 Nov 22,7,Scritto,Nov,1,3
+173,Economia aziendale,5 Dec 22,7.5,Scritto,Dec,1,3
+174,Inglese,6 Dec 22,6.5,Orale,Dec,1,3
+175,Italiano,13 Dec 22,5.5,Scritto,Dec,1,3
+176,Educazione civica,14 Dec 22,7.5,Orale,Dec,1,3
+177,Educazione fisica,19 Dec 22,7,Orale,Dec,1,3
+178,Tedesco,20 Dec 22,4,Scritto,Dec,1,3
+179,Economia politica,21 Dec 22,6.5,Orale,Dec,1,3
+180,Matematica,22 Dec 22,7,Scritto,Dec,1,3
+181,Informatica,10 Jan 23,7.85,Scritto,Jan,1,3
+182,Diritto,12 Jan 23,6,Orale,Jan,1,3
+183,Educazione civica,17 Jan 23,8,Orale,Jan,1,3
+184,Storia,18 Jan 23,7,Orale,Jan,1,3
+185,Educazione civica,23 Jan 23,7.5,Orale,Jan,1,3
+186,Matematica,26 Jan 23,6,Orale,Jan,1,3
+187,Educazione fisica,30 Jan 23,7,Orale,Jan,1,3
+188,Economia aziendale,27 Feb 23,6.15,Orale,Feb,2,3
+189,Italiano,14 Mar 23,7.15,Scritto,Mar,2,3
+190,Educazione civica,14 Mar 23,7.5,Scritto,Mar,2,3
+191,Diritto,15 Mar 23,6,Orale,Mar,2,3
+192,Matematica,16 Mar 23,4,Scritto,Mar,2,3
+193,Economia politica,20 Mar 23,6,Orale,Mar,2,3
+194,Tedesco,21 Mar 23,6.15,Scritto,Mar,2,3
+195,Informatica,24 Mar 23,9,Scritto,Mar,2,3
+196,Tedesco,31 Mar 23,5,Orale,Mar,2,3
+197,Storia,3 Apr 23,5,Orale,Apr,2,3
+198,Economia aziendale,3 Apr 23,2,Orale,Apr,2,3
+199,Inglese,5 Apr 23,8.5,Orale,Apr,2,3
+200,Matematica,13 Apr 23,8,Orale,Apr,2,3
+201,Educazione fisica,17 Apr 23,9,Orale,Apr,2,3
+202,Educazione fisica,17 Apr 23,8,Pratico,Apr,2,3
+203,Educazione civica,17 Apr 23,8.15,Scritto,Apr,2,3
+204,Italiano,20 Apr 23,5,Orale,Apr,2,3
+205,Diritto,20 Apr 23,7,Orale,Apr,2,3
+206,Tedesco,9 May 23,8,Scritto,May,2,3
+207,Italiano,9 May 23,7,Scritto,May,2,3
+208,Inglese,10 May 23,6,Scritto,May,2,3
+209,Economia politica,12 May 23,6.5,Orale,May,2,3
+210,Educazione fisica,15 May 23,7.5,Pratico,May,2,3
+211,Informatica,16 May 23,7,Scritto,May,2,3
+212,Matematica,18 May 23,5.5,Scritto,May,2,3
+213,Economia aziendale,24 May 23,8,Orale,May,2,3
+214,Economia aziendale,29 May 23,9,Orale,May,2,3
+215,Tedesco,30 May 23,8.5,Scritto,May,2,3
+216,Informatica,30 May 23,7.5,Orale,May,2,3
+217,Educazione civica,30 May 23,8,Orale,May,2,3
+218,Economia aziendale,5 Jun 23,8.5,Scritto,Jun,2,3
+219,Educazione civica,6 Jun 23,8,Orale,Jun,2,3
+220,Storia,7 Jun 23,7,Orale,Jun,2,3
+221,Italiano,12 Oct 23,7.5,Scritto,Oct,1,4
+222,Matematica,17 Oct 23,8.5,Orale,Oct,1,4
+223,Economia aziendale,18 Oct 23,8,Scritto,Oct,1,4
+224,Informatica,19 Oct 23,10,Scritto,Oct,1,4
+225,Educazione fisica,27 Oct 23,8,Pratico,Oct,1,4
+226,Economia politica,2 Nov 23,7,Orale,Nov,1,4
+227,Storia,3 Nov 23,7.85,Scritto,Nov,1,4
+228,Italiano,8 Nov 23,9,Orale,Nov,1,4
+229,Diritto,10 Nov 23,7,Orale,Nov,1,4
+230,Inglese,13 Nov 23,7.5,Scritto,Nov,1,4
+231,Matematica,14 Nov 23,6,Scritto,Nov,1,4
+232,Educazione civica,20 Nov 23,7.85,Scritto,Nov,1,4
+233,Economia aziendale,22 Nov 23,7.15,Orale,Nov,1,4
+234,Educazione fisica,24 Nov 23,8,Pratico,Nov,1,4
+235,Informatica,27 Nov 23,8.85,Scritto,Nov,1,4
+236,Italiano,30 Nov 23,7.85,Scritto,Nov,1,4
+237,Inglese,5 Dec 23,9,Orale,Dec,1,4
+238,Educazione civica,6 Dec 23,8.15,Orale,Dec,1,4
+239,Italiano,14 Dec 23,8,Scritto,Dec,1,4
+240,Educazione civica,15 Dec 23,8,Scritto,Dec,1,4
+241,Economia politica,9 Jan 24,7,Orale,Jan,1,4
+242,Diritto,11 Jan 24,7,Orale,Jan,1,4
+243,Storia,12 Jan 24,8,Scritto,Jan,1,4
+244,Educazione civica,12 Jan 24,7.5,Orale,Jan,1,4
+245,Matematica,18 Jan 24,3,Scritto,Jan,1,4
+246,Educazione fisica,19 Jan 24,8,Orale,Jan,1,4
+247,Informatica,24 Jan 24,10,Orale,Jan,1,4
+248,Economia aziendale,24 Jan 24,7.15,Scritto,Jan,1,4
+249,Italiano,25 Jan 24,8,Scritto,Jan,1,4
+250,Educazione civica,26 Jan 24,8.5,Orale,Jan,1,4
+251,Matematica,30 Jan 24,4,Orale,Jan,1,4
+252,Inglese,30 Jan 24,6.85,Scritto,Jan,1,4
+253,Inglese,13 Feb 24,8.5,Orale,Feb,2,4
+254,Italiano,15 Feb 24,6,Scritto,Feb,2,4
+255,Educazione fisica,23 Feb 24,9,Orale,Feb,2,4
+256,Informatica,29 Feb 24,5,Scritto,Feb,2,4
+257,Diritto,29 Feb 24,7,Orale,Feb,2,4
+258,Educazione fisica,1 Mar 24,7.15,Pratico,Mar,2,4
+259,Italiano,8 Mar 24,7.5,Orale,Mar,2,4
+260,Economia politica,8 Mar 24,6.5,Orale,Mar,2,4
+261,Matematica,12 Mar 24,7,Orale,Mar,2,4
+262,Inglese,14 Mar 24,9,Scritto,Mar,2,4
+263,Economia aziendale,18 Mar 24,4.85,Scritto,Mar,2,4
+264,Storia,20 Mar 24,7.5,Scritto,Mar,2,4
+265,Italiano,27 Mar 24,8,Scritto,Mar,2,4
+266,Informatica,5 Apr 24,5,Scritto,Apr,2,4
+267,Matematica,9 Apr 24,3,Scritto,Apr,2,4
+268,Economia politica,17 Apr 24,7,Orale,Apr,2,4
+269,Inglese,22 Apr 24,8,Scritto,Apr,2,4
+270,Inglese,23 Apr 24,9.5,Orale,Apr,2,4
+271,Economia aziendale,29 Apr 24,4.5,Scritto,Apr,2,4
+272,Storia,3 May 24,7.5,Scritto,May,2,4
+273,Informatica,9 May 24,5.5,Orale,May,2,4
+274,Italiano,10 May 24,8,Scritto,May,2,4
+275,Diritto,10 May 24,7,Orale,May,2,4
+276,Informatica,9 Oct 24,5.5,Scritto,Oct,1,5
+277,Economia aziendale,15 Oct 24,5,Scritto,Oct,1,5
+278,Inglese,21 Oct 24,9,Orale,Oct,1,5
+279,Diritto,29 Oct 24,7,Orale,Oct,1,5
+280,Informatica,30 Oct 24,9,Scritto,Oct,1,5
+281,Storia,31 Oct 24,7.5,Orale,Oct,1,5
+282,Italiano,31 Oct 24,7,Scritto,Oct,1,5
+283,Educazione fisica,6 Nov 24,9,Scritto,Nov,1,5
+284,Educazione fisica,6 Nov 24,9,Pratico,Nov,1,5
+285,Matematica,11 Nov 24,5,Orale,Nov,1,5
+286,Italiano,13 Nov 24,8,Orale,Nov,1,5
+287,Economia aziendale,18 Nov 24,4.5,Orale,Nov,1,5
+288,Economia politica,21 Nov 24,5,Orale,Nov,1,5
+289,Inglese,22 Nov 24,7.5,Scritto,Nov,1,5
+290,Educazione civica,10 Dec 24,6,Scritto,Dec,1,5
+291,Italiano,12 Dec 24,7,Scritto,Dec,1,5
+292,Diritto,17 Dec 24,5.5,Orale,Dec,1,5
+293,Informatica,18 Dec 24,7.15,Orale,Dec,1,5
+294,Economia aziendale,18 Dec 24,4.85,Scritto,Dec,1,5
+295,Matematica,10 Jan 25,3.5,Scritto,Jan,1,5
+296,Educazione civica,10 Jan 25,7.5,Scritto,Jan,1,5
+297,Economia politica,14 Jan 25,6.5,Orale,Jan,1,5
+298,Educazione civica,16 Jan 25,8.15,Scritto,Jan,1,5
+299,Storia,17 Jan 25,6,Scritto,Jan,1,5
+300,Economia aziendale,21 Jan 25,3.5,Orale,Jan,1,5
+301,Educazione fisica,22 Jan 25,7,Pratico,Jan,1,5
+302,Educazione civica,22 Jan 25,7,Pratico,Jan,1,5
+303,Inglese,24 Jan 25,9,Scritto,Jan,1,5
+304,Economia aziendale,30 Jan 25,6,Orale,Jan,1,5
+305,Inglese,17 Feb 25,9,Orale,Feb,2,5
+306,Diritto,25 Feb 25,4.5,Orale,Feb,2,5
+307,Matematica,26 Feb 25,7,Orale,Feb,2,5
+308,Italiano,5 Mar 25,5,Scritto,Mar,2,5
+309,Educazione fisica,5 Mar 25,8.15,Pratico,Mar,2,5
+310,Economia aziendale,5 Mar 25,6,Scritto,Mar,2,5
+311,Diritto,11 Mar 25,5.5,Orale,Mar,2,5
+312,Informatica,12 Mar 25,6.5,Scritto,Mar,2,5
+313,Storia,18 Mar 25,6.15,Scritto,Mar,2,5
+314,Economia politica,18 Mar 25,5.85,Orale,Mar,2,5
+315,Inglese,31 Mar 25,7.5,Scritto,Mar,2,5
+316,Informatica,31 Mar 25,7.15,Orale,Mar,2,5
+317,Italiano,1 Apr 25,6.85,Scritto,Apr,2,5
+318,Economia politica,1 Apr 25,6.5,Orale,Apr,2,5
+319,Italiano,3 Apr 25,7.15,Scritto,Apr,2,5
+320,Matematica,7 Apr 25,3,Scritto,Apr,2,5
+321,Economia aziendale,8 Apr 25,5,Orale,Apr,2,5
+322,Educazione fisica,9 Apr 25,9.15,Orale,Apr,2,5
+323,Informatica,16 Apr 25,6.5,Scritto,Apr,2,5
+324,Economia aziendale,29 Apr 25,5.85,Orale,Apr,2,5
+325,Italiano,30 Apr 25,6.5,Scritto,Apr,2,5
+326,Educazione fisica,30 Apr 25,7.15,Pratico,Apr,2,5
+327,Educazione civica,5 May 25,9.5,Scritto,May,2,5
+328,Matematica,5 May 25,5,Orale,May,2,5
+329,Italiano,7 May 25,7,Scritto,May,2,5
+330,Inglese,12 May 25,10,Orale,May,2,5
+331,Matematica,14 May 25,7,Orale,May,2,5
+332,Informatica,21 May 25,5,Orale,May,2,5
+333,Storia,22 May 25,9,Scritto,May,2,5
+334,Italiano,23 May 25,7,Scritto,May,2,5
+335,Inglese,23 May 25,9.15,Scritto,May,2,5
+336,Economia aziendale,27 May 25,5.85,Orale,May,2,5
+337,Diritto,27 May 25,5.5,Orale,May,2,5
+338,Diritto,29 May 25,5,Scritto,May,2,5

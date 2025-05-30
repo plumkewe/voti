@@ -163,6 +163,7 @@
       border-color: #888;
     }
     
+    
     /* Contenitore tabella centrato e larghezza massima */
     /* Contenitore tabella centrato con stessa max-width */
     .table-container {
@@ -364,9 +365,11 @@
     <div class="chart-item" data-type="tipo">Tipo</div>
     <div class="chart-item" data-type="quadrimestre">Quadrimestre</div>
     <div class="chart-item" data-type="mese">Mese</div>
+    <div class="chart-item" data-type="giorno-settimana">Settimana</div>
+    <div class="chart-item" data-type="totali-per-anno">Anno</div>
     <div class="chart-item" data-type="media-mese">Media</div>
     <div class="chart-item" data-type="linea-anno-continuo">Linea Anno Continuo</div>
-    <div class="chart-item" data-type="insufficienze">Insufficienze</div> <!-- ✅ Bottone aggiunto -->
+    <div class="chart-item" data-type="insufficienze">Insufficienze</div> 
     <div class="chart-item" data-type="media-primo-quadrimestre">Media Q1</div>
     <div class="chart-item" data-type="media-secondo-quadrimestre">Media Q2</div>
     <div class="chart-item" data-type="confronto-materie">Confronto Q1 vs Q2</div>
@@ -481,18 +484,58 @@
       return data;
     }
     
-    
-    
-    function buildTable(data) {
+    function buildTable(data, showStats = false) {
+      const thead = document.querySelector('#votiTable thead');
       const tbody = document.querySelector('#votiTable tbody');
+      
+      // Pulisci tbody (dati)
       tbody.innerHTML = '';
       
+      // Pulisci thead ma tieni riga intestazioni in una variabile
+      const headerRow = thead.querySelector('tr:last-child');
+      thead.innerHTML = '';
+      
+      if (showStats) {
+        const voti = data.map(d => parseFloat(d.VOTO.replace(',', '.'))).filter(v => !isNaN(v));
+        const totale = voti.length; // conteggio voti
+        const massimo = voti.length ? Math.max(...voti) : 0;
+        const minimo = voti.length ? Math.min(...voti) : 0;
+        const media = voti.length ? (voti.reduce((acc, v) => acc + v, 0) / totale) : 0;
+        
+        // Riga 1: etichette statistiche con colonna vuota PRIMA
+        const labelRow = document.createElement('tr');
+        labelRow.classList.add('stats-row');
+        ['', 'COUNT', 'MAX', 'MIN', 'AVG'].forEach(label => {
+          const th = document.createElement('th');
+          th.textContent = label;
+          labelRow.appendChild(th);
+        });
+        
+        // Riga 2: valori statistiche con colonna vuota PRIMA
+        const valueRow = document.createElement('tr');
+        valueRow.classList.add('stats-row');
+        ['', totale, massimo, minimo, media.toFixed(2)].forEach(value => {
+          const th = document.createElement('th');
+          th.textContent = typeof value === 'number' ? formatVoto(value) : value;
+          valueRow.appendChild(th);
+        });
+
+        
+        // Inserisci prima le due righe statistiche
+        thead.appendChild(labelRow);
+        thead.appendChild(valueRow);
+      }
+      
+      // Reinserisci la riga intestazioni
+      thead.appendChild(headerRow);
+      
+      // Ora costruisci il tbody con i dati
       let count = 1;
       data.forEach(row => {
         const tr = document.createElement('tr');
         
         const numTd = document.createElement('td');
-        numTd.textContent = count++;
+        numTd.textContent = row.INDEX; // usa il valore statico 'index' dal CSV
         tr.appendChild(numTd);
         
         const materiaTd = document.createElement('td');
@@ -525,6 +568,7 @@
         tbody.appendChild(tr);
       });
     }
+
     
     let allData = [];         // contiene tutti i dati CSV come array di oggetti
     let currentFilter = null; // materia selezionata, null = nessun filtro
@@ -628,7 +672,7 @@
         dataByAnnoEMateria = dataByAnno.filter(d => d.MATERIA === currentFilter);
       }
       
-      // Applico ordinamento se c'è
+      // Ordinamento
       if (currentSort.column) {
         dataByAnnoEMateria = dataByAnnoEMateria.slice().sort((a, b) => {
           let valA = a[currentSort.column];
@@ -648,14 +692,17 @@
         });
       }
       
-      // Ricostruisco tabella e grafico
-      buildTable(dataByAnnoEMateria);
-      renderChart();
+      // Mostro le due righe statistiche solo se ho filtro su anni o materia
+      const showStats = (selectedAnni.size > 0) || (currentFilter !== null);
       
-      // Ricostruisco menu materie e anni come prima
+      // Costruisco la tabella con o senza righe statistiche
+      buildTable(dataByAnnoEMateria, showStats);
+      
+      renderChart();
       buildMaterieList(dataByAnno);
       buildAnniList(allData);
     }
+
 
     
     let selectedChartType = 'tipo'; // default
@@ -712,7 +759,9 @@
       
       const type = selectedChartType;
       const data = getFilteredData();
-      const years = Array.from(selectedAnni.size ? selectedAnni : new Set(allData.map(d => d.A)));
+      const years = Array.from(selectedAnni.size ? selectedAnni : new Set(allData.map(d => d.A)))
+      .sort((a, b) => parseInt(a) - parseInt(b));
+      years.sort((a, b) => parseInt(a) - parseInt(b));
       
       const colors = years.map((y, i) => {
         return getComputedStyle(document.documentElement)
@@ -741,7 +790,107 @@
           }
         });
         
-      }  else if (type === "media-primo-quadrimestre") {
+      } else if (type === "totali-per-anno") {
+        const counts = years.map(anno => {
+          return data.filter(d => d.A === anno).length;
+        });
+        
+        chart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: years.map(y => toRoman(parseInt(y))),
+            datasets: [{
+              label: "Totale voti",
+              data: counts,
+              backgroundColor: colors.map(c => c.trim())
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: { color: 'white' },
+                grid: { color: 'rgba(0,0,0,0.1)' }
+              },
+              x: {
+                ticks: { color: 'white' },
+                grid: { display: false }
+              }
+            },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: ctx => `Totale voti: ${ctx.formattedValue}`
+                }
+              }
+            }
+          }
+        });
+      } else if (type === "giorno-settimana") {
+        const giorniSettimana = ["Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì"];
+        
+        // Funzione per parsare date tipo "2 oct 20"
+        const parseCustomDate = (str) => {
+          const months = {
+            jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+            jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
+          };
+          const [day, monthStr, yearStr] = str.toLowerCase().split(" ");
+          return new Date(2000 + parseInt(yearStr), months[monthStr], parseInt(day));
+        };
+        
+        const datasets = years.map((anno, i) => {
+          const counts = [0, 0, 0, 0, 0]; // Solo Lunedì (1) → Venerdì (5)
+          
+          data
+          .filter(d => d.A === anno)
+          .forEach(d => {
+            const date = parseCustomDate(d.DATA);
+            const giorno = date.getDay();
+            if (giorno >= 1 && giorno <= 5) { // Solo giorni scolastici
+              counts[giorno - 1]++; // Shiftiamo per allinearci con l’indice di counts (0=Lunedì)
+            }
+          });
+          
+          return {
+            label: toRoman(parseInt(anno)),
+            data: counts,
+            backgroundColor: colors[i].trim()
+          };
+        });
+        
+        chart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: giorniSettimana,
+            datasets
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: { color: 'white' },
+                grid: { color: 'rgba(255,255,255,0.1)' }
+              },
+              x: {
+                ticks: { color: 'white' },
+                grid: { display: false }
+              }
+            },
+            plugins: {
+              legend: { position: "top" },
+              tooltip: {
+                callbacks: {
+                  label: ctx => `${ctx.dataset.label} - ${ctx.label}: ${ctx.formattedValue}`
+                }
+              }
+            }
+          }
+        });
+      } else if (type === "media-primo-quadrimestre") {
         // Trova tutte le materie nel dataset (solo dati Q=1)
         const materie = Array.from(new Set(data.filter(d => d.Q === "1").map(d => d.MATERIA)));
         
@@ -893,7 +1042,6 @@
               }
             }
           }
-          
         });
       } else if (type === "confronto-materie") {
         const materie = Array.from(new Set(data.map(d => d.MATERIA)));
@@ -985,8 +1133,7 @@
             }
           }
         });
-      }
-else if (type === "quadrimestre") {
+      } else if (type === "quadrimestre") {
         const labels = ["1", "2"];
         const datasets = years.map((anno, i) => {
           const cnt = { "1": 0, "2": 0 };
