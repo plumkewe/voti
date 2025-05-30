@@ -290,20 +290,18 @@
 
 
     .chart-container {
+      position: relative;
       width: 100%;
-      max-width: 1000px; /* come per le altre liste */
+      max-width: 1000px;
       margin: 0 auto 1rem auto;
       padding: 0.5rem;
       background-color: #1e1e1e;
       border-radius: 8px;
       border: 1px solid #444;
-      
       display: flex;
       justify-content: center;
       align-items: center;
-      
-      /* Altezza fissa o massima altezza */
-      height: 320px;  /* puoi regolare come vuoi */
+      height: 320px;
       box-sizing: border-box;
       overflow: hidden;
     }
@@ -322,7 +320,41 @@
     #myChart {
       width: 100%;
     }
-
+    /* 2) Overlay sempre nascosto di default */
+    .rotate-warning {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      backdrop-filter: blur(8px);
+      background-color: rgba(0,0,0,0.6);
+      color: #fff;
+      display: none;       /* <<< rimane nascosto */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 1rem;
+      border-radius: 8px;
+      z-index: 10;
+    }
+    .rotate-warning p {
+      margin: 0;           /* tolgo i margini default di <p> */
+      padding: 0 1rem;
+    }
+    .rotate-warning .material-symbols-outlined {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    
+    /* 3) Media query: mostra overlay e sfoca solo in portrait su mobile */
+    @media screen and (max-width: 767px) and (orientation: portrait) {
+      #chartContainer {
+        filter: blur(4px); /* ✅ SOLO il contenitore viene sfocato */
+      }
+      .rotate-warning {
+        display: flex;
+      }
+    }
     
     button.sort-button {
       all: unset; /* reset completo dello stile nativo */
@@ -356,7 +388,12 @@
     <div id="chartContainer">
       <canvas id="myChart"></canvas>
     </div>
+    <div class="rotate-warning">
+      <span class="material-symbols-outlined">screen_rotation</span>
+      <p>Ruota il telefono per un'esperienza migliore</p>
+    </div>
   </div>
+
 
   
   <!-- Menu di selezione grafico -->
@@ -370,6 +407,7 @@
     <div class="chart-item" data-type="media-mese">Media</div>
     <div class="chart-item" data-type="linea-anno-continuo">Linea Anno Continuo</div>
     <div class="chart-item" data-type="insufficienze">Insufficienze</div> 
+    <div class="chart-item" data-type="voti-per-materia">Materia</div> 
     <div class="chart-item" data-type="media-primo-quadrimestre">Media Q1</div>
     <div class="chart-item" data-type="media-secondo-quadrimestre">Media Q2</div>
     <div class="chart-item" data-type="confronto-materie">Confronto Q1 vs Q2</div>
@@ -519,7 +557,7 @@
           th.textContent = typeof value === 'number' ? formatVoto(value) : value;
           valueRow.appendChild(th);
         });
-
+        
         
         // Inserisci prima le due righe statistiche
         thead.appendChild(labelRow);
@@ -529,13 +567,24 @@
       // Reinserisci la riga intestazioni
       thead.appendChild(headerRow);
       
-      // Ora costruisci il tbody con i dati
-      let count = 1;
+      // Funzione per convertire numero in romano (1-5)
+      function toRoman(num) {
+        const romans = ["I", "II", "III", "IV", "V"];
+        return romans[num - 1] || num;
+      }
+      
+      // Funzione per ottenere giorno della settimana in italiano
+      function getGiornoSettimana(date) {
+        const giorni = ['Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
+        return giorni[date.getDay()];
+      }
+      
+      // Costruisci tbody
       data.forEach(row => {
         const tr = document.createElement('tr');
         
         const numTd = document.createElement('td');
-        numTd.textContent = row.INDEX; // usa il valore statico 'index' dal CSV
+        numTd.textContent = row.INDEX; 
         tr.appendChild(numTd);
         
         const materiaTd = document.createElement('td');
@@ -544,6 +593,27 @@
         
         const dataTd = document.createElement('td');
         dataTd.textContent = row.DATA;
+        
+        // Parsing data "20 may 19"
+        const parts = row.DATA.split(' ');
+        if (parts.length === 3) {
+          const day = parseInt(parts[0], 10);
+          const monthStr = parts[1].toLowerCase();
+          const yearShort = parseInt(parts[2], 10);
+          const mesi = {
+            'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'may': 4, 'jun': 5,
+            'jul': 6, 'aug': 7, 'sep': 8, 'oct': 9, 'nov': 10, 'dec': 11
+          };
+          const month = mesi[monthStr];
+          if (month !== undefined) {
+            const fullYear = 2000 + yearShort;
+            const dateObj = new Date(fullYear, month, day);
+            const giornoSettimana = getGiornoSettimana(dateObj);
+            const quadrimestre = row.Q || ''; // preso dal csv
+            const annoScolastico = toRoman(parseInt(row.A)) || ''; // preso dal csv convertito in romano
+            dataTd.title = `${giornoSettimana}, Anno: ${annoScolastico}, Quadrimestre: ${quadrimestre}`;
+          }
+        }
         tr.appendChild(dataTd);
         
         const votoTd = document.createElement('td');
@@ -568,6 +638,7 @@
         tbody.appendChild(tr);
       });
     }
+
 
     
     let allData = [];         // contiene tutti i dati CSV come array di oggetti
@@ -790,6 +861,85 @@
           }
         });
         
+      } else if (type === "voti-per-materia") {
+        // Se non è stato selezionato nessun anno, prendi tutti gli anni disponibili
+        const anni = selectedAnni.size > 0
+        ? Array.from(selectedAnni)
+        : Array.from(new Set(data.map(d => d.A)));
+        
+        // Ordina gli anni numericamente
+        anni.sort((a, b) => parseInt(a) - parseInt(b));
+        
+        const filteredData = data.filter(d => anni.includes(d.A));
+        
+        // continua con il resto del codice usando "anni" e "filteredData"...
+        const materie = Array.from(new Set(filteredData.map(d => d.MATERIA))).sort();
+        const tipi = Array.from(new Set(filteredData.map(d => d.TIPO)));
+        
+        // colori soft HSL per ogni TIPO
+        const tipoColors = {};
+        tipi.forEach((tipo, i) => {
+          tipoColors[tipo] = `hsl(${(i * 360 / tipi.length)}, 50%, 65%)`;
+        });
+        
+        // Struttura: anno → materia → tipo → count
+        const counts = {};
+        anni.forEach(anno => {
+          counts[anno] = {};
+          materie.forEach(materia => {
+            counts[anno][materia] = {};
+            tipi.forEach(tipo => {
+              counts[anno][materia][tipo] = 0;
+            });
+          });
+        });
+        
+        filteredData.forEach(d => {
+          if (counts[d.A] && counts[d.A][d.MATERIA] && d.TIPO in counts[d.A][d.MATERIA]) {
+            counts[d.A][d.MATERIA][d.TIPO]++;
+          }
+        });
+        
+        // Crea dataset impilati
+        const datasets = [];
+        anni.forEach((anno) => {
+          tipi.forEach(tipo => {
+            datasets.push({
+              label: `${toRoman(parseInt(anno))} - ${tipo}`,
+              data: materie.map(m => counts[anno][m][tipo]),
+              backgroundColor: tipoColors[tipo],
+              stack: `anno-${anno}`
+            });
+          });
+        });
+        
+        chart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: materie,
+            datasets: datasets
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: false },
+              tooltip: { label: ctx => `${ctx.dataset.label}: ${ctx.formattedValue}` }
+            },
+            scales: {
+              x: {
+                stacked: true,
+                ticks: { color: "white" },
+                grid: { display: false }
+              },
+              y: {
+                beginAtZero: true,
+                stacked: true,
+                ticks: { color: "white" },
+                grid: { color: "rgba(255,255,255,0.1)" }
+              }
+            }
+          }
+        });
       } else if (type === "totali-per-anno") {
         const counts = years.map(anno => {
           return data.filter(d => d.A === anno).length;
@@ -873,7 +1023,7 @@
               y: {
                 beginAtZero: true,
                 ticks: { color: 'white' },
-                grid: { color: 'rgba(255,255,255,0.1)' }
+                grid: { color: 'rgba(0,0,0,0.1)' }
               },
               x: {
                 ticks: { color: 'white' },
