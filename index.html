@@ -402,8 +402,7 @@
     </div>
     <div class="rotate-warning">
       <span class="material-symbols-outlined">screen_rotation</span>
-      <p>Ruota il telefono per un'esperienza migliore</p>
-      <button id="ignoreBlurBtn" class="ignore-blur-btn">Ignora</button>
+      <p>Ruota il telefono per visualizzare i grafici.</p>
     </div>
   </div>
 
@@ -658,17 +657,6 @@
     const chartContainer = document.getElementById('chartContainer');
     const rotateWarning = document.querySelector('.rotate-warning');
     
-    ignoreBtn?.addEventListener('click', () => {
-      chartContainer.style.filter = 'none';
-      rotateWarning.style.display = 'none';
-      localStorage.setItem('blurIgnored', 'true');
-    });
-    
-    if (localStorage.getItem('blurIgnored') === 'true') {
-      chartContainer.style.filter = 'none';
-      rotateWarning.style.display = 'none';
-    }
-
     
     let allData = [];         // contiene tutti i dati CSV come array di oggetti
     let currentFilter = null; // materia selezionata, null = nessun filtro
