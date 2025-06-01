@@ -305,8 +305,6 @@
       overflow-wrap: break-word;     /* va a capo su parole lunghe */
     }
 
-
-
     .chart-container {
       position: relative;
       width: 100%;
@@ -651,7 +649,25 @@
             const giornoSettimana = getGiornoSettimana(dateObj);
             const quadrimestre = row.Q || ''; // preso dal csv
             const annoScolastico = toRoman(parseInt(row.A)) || ''; // preso dal csv convertito in romano
-            dataTd.title = `${giornoSettimana}, Anno: ${annoScolastico}, Quadrimestre: ${quadrimestre}`;
+            // … parsing della data, calcolo giorno/anno/quad …
+            const infoTooltip = `${giornoSettimana},Anno:${annoScolastico},Quadrimestre:${quadrimestre}`;
+            // Non uso più title, ma un attributo personalizzato:
+            dataTd.setAttribute('data-info', infoTooltip);
+            
+            dataTd.addEventListener('click', () => {
+              // Leggo la stringa dal data-info anziché da title
+              const parts = dataTd.getAttribute('data-info').split(',');
+              const giorno = parts[0]; // es "Martedì"
+              const anno = parts[1].split(':')[1];       // es "II"
+              const quadrimestre = parts[2].split(':')[1]; // es "1"
+              
+              const tooltipText = 
+              `Giorno: ${giorno}\n` +
+              `Anno scolastico: ${anno}\n` +
+              `Quadrimestre: ${quadrimestre}`;
+              
+              showTooltip(dataTd, tooltipText);
+            });
           }
         }
         tr.appendChild(dataTd);
@@ -738,39 +754,52 @@
     
     let currentTooltip = null;
     
+    let currentElement = null;
+    
     function showTooltip(element, text) {
-      // Rimuovi eventuali tooltip precedenti
-      const oldTooltip = document.querySelector('.custom-tooltip');
-      if (oldTooltip) oldTooltip.remove();
+      if (currentElement === element && currentTooltip) return;
+      
+      if (currentTooltip) {
+        currentTooltip.remove();
+        currentTooltip = null;
+        currentElement = null;
+      }
       
       const tooltip = document.createElement('div');
-      tooltip.className = 'tooltip-popup'; // Assicurati che questa classe sia definita in CSS con gli stili desiderati
+      tooltip.className = 'tooltip-popup';
       tooltip.textContent = text;
       
       document.body.appendChild(tooltip);
       
       const rect = element.getBoundingClientRect();
+      const tooltipWidth = tooltip.offsetWidth;
+      const pageWidth = window.innerWidth;
       
-      // Posizione solo via style, tutto il resto nel CSS
+      // Calcolo la posizione verticale
+      const top = rect.top + window.scrollY - tooltip.offsetHeight - 10;
+      
+      let left = rect.left;
+      
+      // Se il tooltip esce a destra, lo sposto a sinistra rispetto all'elemento
+      if (rect.left + tooltipWidth > pageWidth) {
+        left = rect.right - tooltipWidth; // o rect.left - (tooltipWidth - element.offsetWidth)
+        if (left < 0) left = 10; // fallback se anche a sinistra non c'è spazio
+      }
+      
       tooltip.style.position = 'absolute';
-      tooltip.style.left = rect.left + 'px';
-      tooltip.style.top = (rect.top + window.scrollY - tooltip.offsetHeight - 10) + 'px';
+      tooltip.style.left = left + 'px';
+      tooltip.style.top = top + 'px';
       
-      // NON mettere altri stili in linea qui!
+      currentTooltip = tooltip;
+      currentElement = element;
       
-      // Nasconde tooltip al mouse leave
-      element.addEventListener('mouseleave', () => tooltip.remove());
+      element.addEventListener('mouseleave', () => {
+        if (currentTooltip) currentTooltip.remove();
+        currentTooltip = null;
+        currentElement = null;
+      });
     }
 
-    
-    document.addEventListener('click', (e) => {
-      if (currentTooltip && !e.target.closest('.tooltip-popup')) {
-        currentTooltip.remove();
-        currentTooltip = null;
-      }
-    });
-
-    
     function buildMaterieList(data) {
       const container = document.getElementById('materieLista');
       container.innerHTML = '';
@@ -840,15 +869,19 @@
 //        updateFilter();
 //      };
 
-        
         div.onclick = () => {
-          currentFilter = materia;
-          updateFilter();
-          
-          if (materia === 'Informatica') {
-            launchPoopConfetti();
+          if (currentFilter === materia) {
+            // Se la stessa materia è già selezionata, deseleziona e torna a 'Tutti'
+            currentFilter = null;
+          } else {
+            currentFilter = materia;
+            if (materia === 'Informatica') {
+              launchPoopConfetti();
+            }
           }
+          updateFilter();
         };
+
         
         // testo materia
         const textSpan = document.createElement('span');
