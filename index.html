@@ -190,7 +190,7 @@
       align-items: center;
     }
     
-    .clear-cache-btn {
+    .icon-button {
       background-color: #333;
       color: #e0e0e0;
       padding: 10px 16px;
@@ -203,14 +203,15 @@
       justify-content: center;
     }
     
-    .clear-cache-btn:hover {
+    .icon-button:hover {
       background-color: #444;
     }
     
-    .clear-cache-btn .material-symbols-outlined {
+    .icon-button .material-symbols-outlined {
       font-size: 20px;
       color: #e0e0e0;
     }
+
 
     
     /* Celle */
@@ -420,6 +421,7 @@
     <div class="chart-item" data-type="media-mese">Media</div>
     <div class="chart-item" data-type="linea-anno-continuo">Linea Anno Continuo</div>
     <div class="chart-item" data-type="insufficienze">Insufficienze</div> 
+    <div class="chart-item" data-type="numero">Numero</div> 
     <div class="chart-item" data-type="frequenza-voti">Frequenza</div> 
     <div class="chart-item" data-type="media-primo-quadrimestre">Media Q1</div>
     <div class="chart-item" data-type="media-secondo-quadrimestre">Media Q2</div>
@@ -456,14 +458,15 @@
   <div class="file-upload">
     <div class="upload-buttons">
       <label for="csvFile">Carica file CSV</label>
-      <button id="clearCacheBtn" class="clear-cache-btn" title="Cancella cache">
+      <button id="clearCacheBtn" class="icon-button" title="Cancella cache">
         <span class="material-symbols-outlined">delete</span>
+      </button>
+      <button class="icon-button" title="Esporta dati">
+        <span class="material-symbols-outlined">download</span>
       </button>
     </div>
     <input type="file" id="csvFile" accept=".csv" />
   </div>
-
-
   
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -1112,6 +1115,10 @@
           backgroundColor: colors.map(c => c.trim())
         }];
         
+        // 🟢 Mostra solo le insufficienze anche nella tabella
+        const datiInsufficienze = data.filter(d => parseFloat(d.VOTO) < 6);
+        buildTable(datiInsufficienze);
+        
         chart = new Chart(ctx, {
           type: "bar",
           data: {
@@ -1129,15 +1136,10 @@
               },
               tooltip: {
                 callbacks: {
-                  // Tooltip personalizzato
                   afterBody: (tooltipItems) => {
                     const anno = years[tooltipItems[0].dataIndex];
                     const insufficienze = data.filter(d =>
                       d.A === anno && parseFloat(d.VOTO) < 6
-                    );
-                    
-                    return insufficienze.map(d =>
-                      `${d.MATERIA}, ${formatVoto(d.VOTO)}, ${d.TIPO}, ${d.Q}`
                     );
                   },
                   label: ctx => `${ctx.dataset.label}: ${ctx.formattedValue}`
@@ -1223,24 +1225,92 @@
           }
 
         });
+      } else if (type === "numero") {
+        // 1. Prepara i giorni da 1 a 31
+        const giorni = Array.from({ length: 31 }, (_, i) => i + 1);
+        
+        // 2. Inizializza i conteggi per ogni giorno
+        const suffPerGiorno = Array(31).fill(0);
+        const insuffPerGiorno = Array(31).fill(0);
+        
+        data.forEach(d => {
+          const parts = d.DATA.split(' ');
+          const giorno = parseInt(parts[0], 10);
+          
+          const voto = parseFloat(d.VOTO);
+          if (!isNaN(giorno) && giorno >= 1 && giorno <= 31 && !isNaN(voto)) {
+            if (voto >= 6) {
+              suffPerGiorno[giorno - 1]++;
+            } else {
+              insuffPerGiorno[giorno - 1]++;
+            }
+          }
+        });
+        
+        // 3. Crea il grafico con due dataset impilati
+        chart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: giorni.map(g => g.toString()),
+            datasets: [
+              {
+                label: "Sufficienze",
+                data: suffPerGiorno,
+                backgroundColor: "#48C936",
+                stack: 'voti'
+              },
+              {
+                label: "Insufficienze",
+                data: insuffPerGiorno,
+                backgroundColor: "#C73232",
+                stack: 'voti'
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: "Giorno del mese",
+                  color: "white"
+                },
+                ticks: { color: "white" },
+                grid: { display: false }
+              },
+              y: {
+                beginAtZero: true,
+                ticks: { display: false }, // <-- NASCONDE I VALORI Y
+                grid: { color: "rgba(255,255,255,0.1)" }
+              }
+            },
+            plugins: {
+              legend: {
+                labels: { color: "white" }
+              },
+              tooltip: {
+                callbacks: {
+                  label: ctx => `${ctx.dataset.label}: ${ctx.formattedValue} voto/i`
+                }
+              }
+            }
+          }
+        });
       } else if (type === "frequenza-voti") {
-        // 1. Estrazione dei voti unici (ad es. [1,2,3,…,10])
         const votiUnici = Array.from(new Set(data.map(d => d.VOTO.toString())))
         .map(v => parseFloat(v))
         .filter(v => !isNaN(v));
         votiUnici.sort((a, b) => a - b);
         
-        // 2. Estrazione delle materie
         const materie = Array.from(new Set(data.map(d => d.MATERIA))).sort();
         
-        // 3. Assegna un colore diverso a ciascuna materia
         const materiaColors = {};
         materie.forEach((m, i) => {
           const hue = Math.round((i * 360) / materie.length);
-          materiaColors[m] = `hsl(${hue}, 60%,  50%)`;
+          materiaColors[m] = `hsl(${hue}, 60%, 50%)`;
         });
         
-        // 4. Calcolo delle occorrenze counts[voto][materia]
         const counts = {};
         votiUnici.forEach(voto => {
           counts[voto] = {};
@@ -1257,26 +1327,22 @@
           }
         });
         
-        // 5. Creazione dei datasets — uno per materia, con “data” = array di conteggi per ciascun voto
         const datasets = materie.map(materia => {
           return {
             label: materia,
             data: votiUnici.map(voto => counts[voto][materia]),
-            backgroundColor: materiaColors[materia],
-            // (non serve “stack” se usi stacking globale)
+            backgroundColor: materiaColors[materia]
           };
         });
         
-        // 6. Distruggi eventualmente il grafico precedente
         if (chart) {
           chart.destroy();
         }
         
-        // 7. Creazione del nuovo chart
         chart = new Chart(ctx, {
           type: "bar",
           data: {
-            labels: votiUnici.map(v => v.toString()),  // es. ["1","2","3",…]
+            labels: votiUnici.map(v => formatVoto(v)), // 🟢 etichette X formattate
             datasets: datasets
           },
           options: {
@@ -1285,13 +1351,12 @@
               legend: {
                 position: "top",
                 labels: {
-                  color: "white"   // se lo sfondo è scuro, altrimenti rimuovi
+                  color: "white"
                 }
               },
               tooltip: {
                 callbacks: {
                   label: context => {
-                    // Es. “Italiano: 2 volte”
                     const mat = context.dataset.label;
                     const cnt = context.parsed.y;
                     return `${mat}: ${cnt}`;
@@ -1307,13 +1372,19 @@
                   text: "Voti",
                   color: "white"
                 },
-                ticks: { color: "white" },
+                ticks: {
+                  color: "white",
+                  callback: function(val, index) {
+                    const label = this.getLabelForValue(val);
+                    return formatVoto(label);
+                  }
+                },
                 grid: { display: false }
               },
               y: {
                 stacked: true,
                 beginAtZero: true,
-                ticks: { display: false },   // NASCONDE i numeri sull’asse Y
+                ticks: { display: false },
                 grid: { drawBorder: false, color: "rgba(255,255,255,0.1)" }
               }
             }
