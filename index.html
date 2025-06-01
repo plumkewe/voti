@@ -212,7 +212,6 @@
       color: #e0e0e0;
     }
 
-
     
     /* Celle */
     th, td {
@@ -288,6 +287,24 @@
       background-color: #444;
       border-color: #888;
     }
+    
+    .tooltip-popup {
+      position: absolute;
+      background-color: #1e1e1e;      /* stesso background della tabella/contesto */
+      color: #e0e0e0;                 /* testo chiaro in stile Roboto */
+      border: 1px solid #444;        /* bordo scuro, coerente con gli altri elementi */
+      padding: 8px 12px;
+      border-radius: 6px;            /* radius leggermente ridotto per uniformità */
+      font-size: 0.9rem;
+      font-family: "Roboto", sans-serif;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); /* ombra più marcata su dark */
+      z-index: 999;
+      white-space: pre-line;
+      pointer-events: none;
+      max-width: 200px;              /* evita che il testo si allunghi troppo */
+      overflow-wrap: break-word;     /* va a capo su parole lunghe */
+    }
+
 
 
     .chart-container {
@@ -461,9 +478,9 @@
       <button id="clearCacheBtn" class="icon-button" title="Cancella cache">
         <span class="material-symbols-outlined">delete</span>
       </button>
-      <button class="icon-button" title="Esporta dati">
-        <span class="material-symbols-outlined">download</span>
-      </button>
+<!--  <button class="icon-button" title="Esporta dati">-->
+<!--    <span class="material-symbols-outlined">download</span>-->
+<!--  </button>-->
     </div>
     <input type="file" id="csvFile" accept=".csv" />
   </div>
@@ -537,6 +554,13 @@
       
       return data;
     }
+    
+    function calcolaMedia(array) {
+      const numeri = array.map(r => parseFloat(r.VOTO.replace(',', '.'))).filter(n => !isNaN(n));
+      if (numeri.length === 0) return '-';
+      return (numeri.reduce((a, b) => a + b, 0) / numeri.length).toFixed(2);
+    }
+
     
     function buildTable(data, showStats = false) {
       const thead = document.querySelector('#votiTable thead');
@@ -634,6 +658,30 @@
         
         const votoTd = document.createElement('td');
         votoTd.textContent = formatVoto(row.VOTO);
+
+        
+        votoTd.addEventListener('click', (e) => {
+          const thisDate = parseCSVDate(row.DATA);
+          const thisMateria = row.MATERIA;
+          
+          const votiEntroData = data.filter(r => parseCSVDate(r.DATA) <= thisDate);
+          const votiMateriaEntroData = votiEntroData.filter(r => r.MATERIA === thisMateria);
+          
+          const mediaGenerale = calcolaMedia(votiEntroData);
+          const mediaMateria = calcolaMedia(votiMateriaEntroData);
+          
+          const mediaQ1 = calcolaMedia(votiMateriaEntroData.filter(r => r.Q === '1'));
+          const mediaQ2 = calcolaMedia(votiMateriaEntroData.filter(r => r.Q === '2'));
+          
+          const tooltipText =
+          `Media Generale: ${mediaGenerale}\n` +
+          `${thisMateria}: ${mediaMateria}\n` +
+          `Q1: ${mediaQ1} | Q2: ${mediaQ2}`;
+          
+          showTooltip(votoTd, tooltipText);
+        });
+
+        
         tr.appendChild(votoTd);
         
         const tipoTd = document.createElement('td');
@@ -655,6 +703,30 @@
       });
     }
 
+    function parseCSVDate(dateStr) {
+      const parts = dateStr.split(' ');
+      const mesi = {
+        'jan': 0, 'feb': 1, 'mar': 2, 'apr': 3, 'may': 4, 'jun': 5,
+        'jul': 6, 'aug': 7, 'sep': 8, 'oct': 9, 'nov': 10, 'dec': 11
+      };
+      if (parts.length === 3) {
+        const day = parseInt(parts[0], 10);
+        const month = mesi[parts[1].toLowerCase()];
+        const year = 2000 + parseInt(parts[2], 10);
+        return new Date(year, month, day);
+      }
+      return new Date('Invalid');
+    }
+    
+    function calcolaMedia(votiRows) {
+      const voti = votiRows
+      .map(r => parseFloat(r.VOTO.replace(',', '.')))
+      .filter(v => !isNaN(v));
+      if (voti.length === 0) return '-';
+      const somma = voti.reduce((acc, v) => acc + v, 0);
+      return (somma / voti.length).toFixed(2);
+    }
+
 
     const ignoreBtn = document.getElementById('ignoreBlurBtn');
     const chartContainer = document.getElementById('chartContainer');
@@ -664,6 +736,40 @@
     let allData = [];         // contiene tutti i dati CSV come array di oggetti
     let currentFilter = null; // materia selezionata, null = nessun filtro
     
+    let currentTooltip = null;
+    
+    function showTooltip(element, text) {
+      // Rimuovi eventuali tooltip precedenti
+      const oldTooltip = document.querySelector('.custom-tooltip');
+      if (oldTooltip) oldTooltip.remove();
+      
+      const tooltip = document.createElement('div');
+      tooltip.className = 'tooltip-popup'; // Assicurati che questa classe sia definita in CSS con gli stili desiderati
+      tooltip.textContent = text;
+      
+      document.body.appendChild(tooltip);
+      
+      const rect = element.getBoundingClientRect();
+      
+      // Posizione solo via style, tutto il resto nel CSS
+      tooltip.style.position = 'absolute';
+      tooltip.style.left = rect.left + 'px';
+      tooltip.style.top = (rect.top + window.scrollY - tooltip.offsetHeight - 10) + 'px';
+      
+      // NON mettere altri stili in linea qui!
+      
+      // Nasconde tooltip al mouse leave
+      element.addEventListener('mouseleave', () => tooltip.remove());
+    }
+
+    
+    document.addEventListener('click', (e) => {
+      if (currentTooltip && !e.target.closest('.tooltip-popup')) {
+        currentTooltip.remove();
+        currentTooltip = null;
+      }
+    });
+
     
     function buildMaterieList(data) {
       const container = document.getElementById('materieLista');
