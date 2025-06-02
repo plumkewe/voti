@@ -224,13 +224,6 @@
       text-overflow: ellipsis;
     }
     
-    /* Colonne specifiche con larghezza fissa per stabilità */
-    th:nth-child(1), td:nth-child(1) { width: 40px; }   /* numero */
-    th:nth-child(2), td:nth-child(2) { width: 180px; }  /* materia */
-    th:nth-child(3), td:nth-child(3) { width: 100px; }  /* data */
-    th:nth-child(4), td:nth-child(4) { width: 70px; }   /* voto */
-    th:nth-child(5), td:nth-child(5) { width: 70px; }   /* tipo */
-    
     th {
       background-color: #2a2a2a;
       color: #ffffff;
@@ -401,6 +394,14 @@
       color: #aaa;
       user-select: none;
     }
+    
+    /* Colonne specifiche con larghezza fissa per stabilità */
+    #votiTable th:nth-child(1), #votiTable td:nth-child(1) { width: 40px; font-weight: bold; }   /* numero */
+    th:nth-child(2), td:nth-child(2) { width: 180px; }  /* materia */
+    th:nth-child(3), td:nth-child(3) { width: 100px; }  /* data */
+    th:nth-child(4), td:nth-child(4) { width: 70px; }   /* voto */
+    th:nth-child(5), td:nth-child(5) { width: 70px; }   /* tipo */
+    
     @media (max-width: 600px) {
       body {
         padding: 5px;
@@ -1255,8 +1256,8 @@
         }];
         
         // 🟢 Mostra solo le insufficienze anche nella tabella
-        const datiInsufficienze = data.filter(d => parseFloat(d.VOTO) < 6);
-        buildTable(datiInsufficienze);
+//      const datiInsufficienze = data.filter(d => parseFloat(d.VOTO) < 6);
+//      buildTable(datiInsufficienze);
         
         chart = new Chart(ctx, {
           type: "bar",
