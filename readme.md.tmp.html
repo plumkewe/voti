@@ -1,0 +1,147 @@
+<meta charset="UTF-8">
+<h1>Voti</h1>
+
+<p>Durante gli anni di scuola avevo iniziato a raccogliere i voti che prendevo, prima annotandoli in un foglio Excel con qualche grafico per visualizzarli meglio. Avevo anche messo in piedi un database MySQL per gestirli in modo più strutturato, ma alla fine, per semplificarmi la vita, non lo tenevo sempre aggiornato.</p>
+
+<p>La realizzazione di questo sito, pur non essendo perfetto, è stata possibile grazie al vibe coding. Inoltre è disponibile anche una <a href="https://aaa.craft.me/blog/pubblicazione/superiori">pubblicazione sul mio blog</a> in cui parlo di questo progetto.</p>
+
+<hr />
+
+<h2>Fatto con</h2>
+
+<p><p>
+  <img height="32" width="32" src="https://cdn.simpleicons.org/html5/orange" />
+  <img height="32" width="32" src="https://cdn.simpleicons.org/css/orange" />
+  <img height="32" width="32" src="https://cdn.simpleicons.org/javascript/orange" />
+  <img height="32" width="32" src="https://cdn.simpleicons.org/openai/orange" />
+<p></p>
+
+<hr />
+
+<p><img src="res/exp-pic.jpg" alt="Il sito" title="" /></p>
+
+<p><em>L’immagine mostra come è organizzato il sito e quali sono le sue principali funzionalità. La struttura è suddivisa in cinque aree:</em></p>
+
+<hr />
+
+<h2>1. Area dei grafici</h2>
+
+<p>Questa sezione è dedicata alla visualizzazione dei grafici interattivi. I grafici si aggiornano dinamicamente in base alle selezioni effettuate nelle altre sezioni del sito.</p>
+
+<hr />
+
+<h2>2. Selezione dei grafici</h2>
+
+<p>Gli utenti possono scegliere tra diversi tipi di grafici disponibili, ciascuno rappresentante un aspetto specifico dell’andamento scolastico. I grafici disponibili sono:</p>
+
+<ul>
+<li><p><strong>Tipo</strong> <br />
+Grafico a torta che mostra la distribuzione dei compiti svolti per tipologia: scritto, orale e pratico.</p></li>
+<li><p><strong>Anno</strong> <br />
+Grafico a barre che rappresenta il numero totale di voti ricevuti per ciascun anno scolastico.</p></li>
+<li><p><strong>Materia</strong> <br />
+Grafico a colonne impilate che visualizza, per ogni materia, la quantità di voti per ciascuna tipologia (scritto, orale, pratico). Utilizza la stessa codifica cromatica del grafico "Tipo".</p></li>
+<li><p><strong>Quadrimestre</strong> <br />
+Grafico a barre che mostra il numero totale di voti ricevuti nel primo e nel secondo quadrimestre.</p></li>
+<li><p><strong>Mese</strong> <br />
+Grafico a barre che illustra quanti voti sono stati assegnati mese per mese.</p></li>
+<li><p><strong>Settimana</strong> <br />
+Grafico a barre che mostra la distribuzione dei voti ricevuti in base al giorno della settimana.</p></li>
+<li><p><strong>Media</strong> <br />
+Grafico a linee che rappresenta l’andamento della media mensile dei voti.</p></li>
+<li><p><strong>Linea Anno Continua</strong> <br />
+Grafico a linea continua che visualizza l’andamento dei voti nel tempo. È particolarmente utile quando si analizza una singola materia su più anni, oppure tutte le materie in un solo anno.</p></li>
+<li><p><strong>Insufficienze</strong> <br />
+Grafico a barre che mostra il numero totale di insufficienze registrate per ciascun anno scolastico.</p></li>
+<li><p><strong>Numero</strong> <br />
+Grafico a colonne impilate che mostra, per ogni materia, il numero di sufficienze e insufficienze ottenute.</p></li>
+<li><p><strong>Frequenza</strong> <br />
+Grafico a colonne impilate che evidenzia, per ciascun voto, con quale frequenza è stato assegnato e a quale materia è associato.</p></li>
+<li><p><strong>Media Q1</strong> <br />
+Grafico a barre che mostra la media dei voti per materia nel <strong>primo quadrimestre</strong>.</p></li>
+<li><p><strong>Media Q2</strong> <br />
+Grafico a barre che mostra la media dei voti per materia nel <strong>secondo quadrimestre</strong>.</p></li>
+<li><p><strong>Confronto Q1 vs Q2</strong> <br />
+Grafico a barre che confronta, per ciascuna materia, la media del primo quadrimestre con quella del secondo.</p></li>
+</ul>
+
+<hr />
+
+<h2>3. Selezione dell’anno scolastico</h2>
+
+<p>È possibile selezionare uno o più anni scolastici (es. Primo, Quinto o tutti insieme). La selezione degli anni influenza sia i grafici che la tabella sottostante. Ogni anno selezionato è rappresentato da un colore distinto nel grafico, per facilitarne la distinzione visiva.</p>
+
+<hr />
+
+<h2>4. Selezione delle materie</h2>
+
+<p>Qui viene mostrato l’elenco delle materie, ognuna accompagnata dal numero di voti ricevuti, suddivisi per tipologia: scritto, orale e pratico. <br />
+Anche questa sezione è influenzata dalla selezione degli anni. <br />
+È possibile, ad esempio, selezionare <em>Economia Aziendale</em> e analizzare i dati per tutti e cinque gli anni.</p>
+
+<hr />
+
+<h2>5. La tabella dei voti</h2>
+
+<p>Contiene i dettagli dei singoli voti, organizzati in colonne:</p>
+
+<ul>
+<li><strong>#</strong>: Indice del voto  </li>
+<li><strong>Materia</strong>: Nome della materia  </li>
+<li><strong>Data</strong>: Data in cui il voto è stato assegnato, ordinabile in modo crescente o decrescente  </li>
+<li><strong>Voto</strong>: Valutazione ricevuta, visualizzata in formato leggibile (es. <code>4.5</code> sarà mostrato come <strong>4½</strong>), anche questa colonna è ordinabile  </li>
+<li><p><strong>Tipo</strong>: Tipologia del voto, rappresentata da un’icona:</p>
+
+<ul>
+<li>Foglio = Compito scritto  </li>
+<li>Bocca parlante = Voto orale  </li>
+<li>Scarpa da ginnastica = Voto pratico  </li>
+</ul>
+
+<p><p>Passando il mouse sull’icona (<em>hover</em>) viene visualizzata una descrizione dettagliata.</p></li>
+</ul></p>
+
+<h3>Funzionalità aggiuntive della tabella</h3>
+
+<ul>
+<li><p><strong>5.1</strong> Cliccando su una cella nella colonna <strong>Data</strong>, appare un messaggio con informazioni dettagliate:</p>
+
+<ul>
+<li>Giorno della settimana  </li>
+<li>Anno scolastico (es. I, II, III…)  </li>
+<li>Quadrimestre relativo</li>
+</ul></li>
+<li><p><strong>5.2</strong> Cliccando su una cella nella colonna <strong>Voto</strong>, viene mostrato un riepilogo con:</p>
+
+<ul>
+<li>Media generale calcolata fino a quel voto  </li>
+<li>Media della materia corrispondente alla riga  </li>
+<li>Media del primo e secondo quadrimestre fino a quel momento  </li>
+</ul>
+
+<p><p>Tutti questi valori si aggiornano dinamicamente in base alla selezione degli anni e delle materie.</p></li>
+</ul>
+<hr /></p>
+
+<h2>Altro</h2>
+
+<p>È possibile caricare un file <code>.csv</code> personalizzato, formattato secondo la seguente struttura:</p>
+
+<p>| INDEX | MATERIA  | DATA       | VOTO | TIPO    | Q | A |
+|-------|----------|------------|------|---------|---|---|
+| 1     | Italiano | 2 Oct 20   | 5    | Scritto | 1 | 1 |
+| 2     | Inglese  | 14 Oct 20  | 7.85 | Scritto | 1 | 1 |
+| 3     | Scienze  | 19 Oct 20  | 4.85 | Orale   | 1 | 1 |</p>
+
+<h3>Come caricare il file</h3>
+
+<ol>
+<li>Scorri fino in fondo alla pagina.</li>
+<li>Clicca sul pulsante <strong>"Carica file CSV"</strong>.</li>
+<li>Seleziona il file formattato correttamente come mostrato sopra.</li>
+</ol>
+
+<blockquote>
+  <p>Il file verrà salvato localmente nella cache del browser. <br />
+Per cancellarlo, clicca sull’icona del <strong>cestino</strong> accanto al pulsante di caricamento.</p>
+</blockquote>

@@ -1,0 +1,384 @@
+/* ------------------------------------------------------------
+   1. Global Reset & Base Styles
+------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-dark: #0f0f0f;
+  --bg-medium: #1c1c1c;
+  --bg-light: #2a2a2a;
+  --text-light: #e0e0e0;
+  --text-muted: #aaa;
+  --accent: #4A90E2;
+  --border-color: #333;
+  --hover-bg: #333333;
+  --radius: 10px;
+  --transition: 0.25s ease;
+  --color-anno-1: #4A90E2;
+  --color-anno-2: #E94E77;
+  --color-anno-3: #F5A623;
+  --color-anno-4: #7ED321;
+  --color-anno-5: #50E3C2;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  margin: 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+/* Responsive Padding */
+@media (max-width: 600px) {
+  body {
+    padding: 1rem;
+  }
+}
+
+/* ------------------------------------------------------------
+   2. Scrollbar Hidden for Lists
+------------------------------------------------------------ */
+.materie-lista,
+.anni-lista {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.materie-lista::-webkit-scrollbar,
+.anni-lista::-webkit-scrollbar {
+  display: none;
+}
+
+/* ------------------------------------------------------------
+   3. Upload Styles
+------------------------------------------------------------ */
+.file-upload {
+  margin: 2rem 0;
+}
+
+.file-upload label {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  transition: background-color var(--transition);
+}
+
+.file-upload label:hover {
+  background-color: var(--hover-bg);
+}
+
+.file-upload input {
+  display: none;
+}
+
+.file-upload .upload-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.file-upload .icon-button {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  transition: background-color var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-upload .icon-button:hover {
+  background-color: var(--hover-bg);
+}
+
+.file-upload .icon-button .material-symbols-outlined {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+/* ------------------------------------------------------------
+   4. Horizontal Lists (Materie & Anni)
+------------------------------------------------------------ */
+.materie-lista,
+.anni-lista {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 1rem;
+  display: flex;
+  overflow-x: auto;
+  padding: 0.5rem;
+  background-color: var(--bg-medium);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+  gap: 0.5rem;
+}
+
+.materia-item,
+.anno-item,
+.chart-item {
+  flex-shrink: 0;
+  padding: 0.4rem 1rem;
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+  user-select: none;
+  text-align: center;
+  transition: background-color var(--transition), border-color var(--transition);
+}
+
+.materia-item:hover,
+.anno-item:hover,
+.chart-item:hover,
+.materia-item.active,
+.anno-item.active,
+.chart-item.active {
+  background-color: var(--hover-bg);
+  border-color: #555;
+}
+
+.materia-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+/* ------------------------------------------------------------
+   5. Table Styles
+------------------------------------------------------------ */
+.table-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  background-color: var(--bg-medium);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: var(--radius);
+}
+
+th,
+td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 80px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  background-color: var(--bg-light);
+  color: #fff;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background-color: #141414;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Fixed Width Columns */
+#votiTable th:nth-child(1),
+#votiTable td:nth-child(1) {
+  width: 40px;
+  font-weight: bold;
+}
+#votiTable th:nth-child(2),
+#votiTable td:nth-child(2) {
+  width: 180px;
+}
+#votiTable th:nth-child(3),
+#votiTable td:nth-child(3) {
+  width: 100px;
+}
+#votiTable th:nth-child(4),
+#votiTable td:nth-child(4) {
+  width: 70px;
+}
+#votiTable th:nth-child(5),
+#votiTable td:nth-child(5) {
+  width: 70px;
+}
+
+/* ------------------------------------------------------------
+   6. Buttons & Icons
+------------------------------------------------------------ */
+.icon-button {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  transition: background-color var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-button:hover {
+  background-color: var(--hover-bg);
+}
+
+.icon-button .material-symbols-outlined {
+  font-size: 20px;
+  color: var(--text-light);
+}
+
+button.sort-button {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-light);
+  font-family: inherit;
+  user-select: none;
+}
+
+button.sort-button .material-symbols-outlined {
+  font-size: 18px;
+  color: var(--text-muted);
+}
+
+/* Text Link Button */
+.ignore-blur-btn {
+  all: unset;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  margin-top: 1rem;
+}
+
+.ignore-blur-btn:hover {
+  text-decoration: none;
+}
+
+/* ------------------------------------------------------------
+   7. Chart & Tooltip
+------------------------------------------------------------ */
+.chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 1rem auto;
+  padding: 1rem;
+  background-color: var(--bg-medium);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 320px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#chartContainer {
+  width: 100%;
+  max-width: 700px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tooltip-popup {
+  position: absolute;
+  background-color: var(--bg-medium);
+  color: var(--text-light);
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-family: inherit;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  white-space: pre-line;
+  pointer-events: none;
+  max-width: 200px;
+  overflow-wrap: break-word;
+}
+
+/* ------------------------------------------------------------
+   8. Miscellaneous
+------------------------------------------------------------ */
+.tipo-count {
+  align-items: baseline;
+}
+
+.material-symbols-outlined {
+  font-size: 1rem;
+  vertical-align: top;
+}
+
+/* Rotate Warning */
+.rotate-warning {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  z-index: 10;
+}
+
+.rotate-warning p {
+  margin: 0;
+  padding: 0 1rem;
+}
+
+.rotate-warning .material-symbols-outlined {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+/* Portrait Mode Warning */
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  #chartContainer {
+    filter: blur(4px);
+  }
+
+  .rotate-warning {
+    display: flex;
+  }
+}
